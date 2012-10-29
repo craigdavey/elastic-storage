@@ -7,7 +7,7 @@
     "type": "MIT",
     "url": "https://github.com/craigdavey/elastic_storage/raw/master/License.txt"
   }],
-  "main": "lib",
+  "main": "src",
   "scripts": {
     "test": "coffee --compile --output lib src && nodeunit test/*_test.coffee"
   },
