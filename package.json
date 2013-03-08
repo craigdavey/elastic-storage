@@ -12,7 +12,7 @@
     "test": "coffee --compile --output lib src && nodeunit test/*_test.coffee"
   },
   "dependencies": {
-    "async": ">=0.1",
+    "async": ">=0.2.6",
     "underscore": ">=1.4.4"
   },
   "devDependencies": {
