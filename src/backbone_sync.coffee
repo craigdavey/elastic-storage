@@ -50,7 +50,7 @@ module.exports.setupBackboneSync = (options={}) ->
     
     storage[method] address, input, (error, output, response, request) ->
       callback = if error then "error" else "success"
-      options[callback](output, response.statusCode, request)
+      options[callback](object, output, options)
 
 
 getValue = (object, member) ->
