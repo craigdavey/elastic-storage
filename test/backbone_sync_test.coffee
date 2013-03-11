@@ -1,9 +1,44 @@
 {ElasticStorage} = require "./test_helper"
-{series} = require "async"
+{series, nextTick} = require "async"
 Backbone = require "backbone"
 
 module.exports =
+  setUp:    (done) -> (new ElasticStorage).init "test", done
   tearDown: (done) -> (new ElasticStorage).drop "test", done
+
+
+  "save model and listen for sync event": (test) ->
+    test.expect 1
+    
+    model = new Backbone.Model
+    model.sync = ElasticStorage.setupBackboneSync()
+    model.storageAddress = -> 
+      if @isNew() then "test/models" else "test/models/#{@id}"
+    
+    model.save()
+    
+    model.on "sync", ->
+      test.assert model.has("id")
+      test.done()
+
+
+  "save model and listen for error event": (test) ->
+    test.expect 1
+    
+    storage = new ElasticStorage
+    storage.create = (address, attributes, callback) -> 
+      nextTick -> callback("Error occurred")
+    
+    model = new Backbone.Model
+    model.sync = ElasticStorage.setupBackboneSync(storage)
+    model.storageAddress = -> 
+      if @isNew() then "test/models" else "test/models/#{@id}"
+    
+    model.save()
+    
+    model.on "error", ->
+      test.assert true
+      test.done()
 
 
   "create from a model with a `storageAddress` method": (test) ->

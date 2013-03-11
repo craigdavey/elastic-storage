@@ -49,8 +49,12 @@ module.exports.setupBackboneSync = (options={}) ->
         object.toJSON()
     
     storage[method] address, input, (error, output, response, request) ->
-      callback = if error then "error" else "success"
-      options[callback](object, output, options)
+      if error is undefined
+        if options.success then options.success(object, output, options)
+        object.trigger("sync", object, output, options)
+      else
+        if options.error then options.error(object, request, options)
+        object.trigger("error", object, request, options)
 
 
 getValue = (object, member) ->
