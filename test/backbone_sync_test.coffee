@@ -7,6 +7,66 @@ module.exports =
   tearDown: (done) -> (new ElasticStorage).drop "test", done
 
 
+  "fetch a model": (test) ->
+    test.expect 1
+    storage = new ElasticStorage
+    series [
+      (ƒ) -> storage.index "test/models/1", {"name": "Duke"}, ƒ
+      (ƒ) -> storage.refresh "test", ƒ
+    ], ->
+      model = new Backbone.Model
+      model.sync = ElasticStorage.setupBackboneSync(storage)
+      model.url = "test/models/1"
+      model.fetch
+        success: ->
+          test.symmetry model.toJSON(),
+            "id": "1"
+            "name": "Duke"
+          test.done()
+
+
+  "fetch a collection of models without criteria": (test) ->
+    test.expect 1
+    storage = new ElasticStorage
+    series [
+      (ƒ) -> storage.index "test/models/1", {"name": "Duke"}, ƒ
+      (ƒ) -> storage.index "test/models/2", {"name": "Luke"}, ƒ
+      (ƒ) -> storage.refresh "test", ƒ
+    ], ->
+      collection = new Backbone.Collection
+      collection.sync = ElasticStorage.setupBackboneSync(storage)
+      collection.url = "test/models"
+      collection.fetch
+        success: ->
+          test.same collection.toJSON(), [
+            {"id": "2", "name": "Luke"}
+            {"id": "1", "name": "Duke"}
+          ]
+          test.done()
+
+
+  "fetch a collection of models with criteria": (test) ->
+    test.expect 1
+    storage = new ElasticStorage
+    series [
+      (ƒ) -> storage.index "test/models/1", {"name": "Duke"}, ƒ
+      (ƒ) -> storage.index "test/models/2", {"name": "Luke"}, ƒ
+      (ƒ) -> storage.refresh "test", ƒ
+    ], ->
+      collection = new Backbone.Collection
+      collection.sync = ElasticStorage.setupBackboneSync(storage)
+      collection.url = "test/models"
+      collection.criteria =
+        "sort": "name"
+        "size": 1
+      collection.fetch
+        success: ->
+          test.same collection.toJSON(), [
+            {"id": "1", "name": "Duke"}
+          ]
+          test.done()
+
+
   "save model and listen for sync event": (test) ->
     test.expect 1
     
@@ -65,64 +125,6 @@ module.exports =
       success: ->
         test.assert model.has("id")
         test.done()
-
-
-  "fetch a model": (test) ->
-    test.expect 1
-    storage = new ElasticStorage
-    series [
-      (ƒ) -> storage.index "test/models/1", {"name": "Duke"}, ƒ
-      (ƒ) -> storage.refresh "test", ƒ
-    ], ->
-      model = new Backbone.Model
-      model.sync = ElasticStorage.setupBackboneSync(storage)
-      model.url = "test/models/1"
-      model.fetch
-        success: ->
-          test.symmetry model.toJSON(),
-            "id": "1"
-            "name": "Duke"
-          test.done()
-
-
-  "fetch a collection": (test) ->
-    test.expect 1
-    storage = new ElasticStorage
-    series [
-      (ƒ) -> storage.index "test/models/1", {"name": "Duke"}, ƒ
-      (ƒ) -> storage.index "test/models/2", {"name": "Luke"}, ƒ
-      (ƒ) -> storage.refresh "test", ƒ
-    ], ->
-      collection = new Backbone.Collection
-      collection.sync = ElasticStorage.setupBackboneSync(storage)
-      collection.url = "test/models"
-      collection.fetch
-        success: ->
-          test.symmetry collection.toJSON(), [
-            {"id": "1", "name": "Duke"}
-            {"id": "2", "name": "Luke"}
-          ]
-          test.done()
-
-
-  "fetch a collection with criteria": (test) ->
-    test.expect 1
-    storage = new ElasticStorage
-    series [
-      (ƒ) -> storage.index "test/models/1", {"name": "Duke"}, ƒ
-      (ƒ) -> storage.index "test/models/2", {"name": "Luke"}, ƒ
-      (ƒ) -> storage.refresh "test", ƒ
-    ], ->
-      collection = new Backbone.Collection
-      collection.sync = ElasticStorage.setupBackboneSync(storage)
-      collection.url = "test/models"
-      collection.criteria = {"size": 1}
-      collection.fetch
-        success: ->
-          test.symmetry collection.toJSON(), [
-            {"id": "1", "name": "Duke"}
-          ]
-          test.done()
 
 
   "update a model": (test) ->
