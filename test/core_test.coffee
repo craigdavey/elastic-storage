@@ -15,14 +15,14 @@ module.exports =
     @storage.drop "test", done
 
 
-  "searching with blank critera returns all records": (test) ->
+  "searching with blank criteria returns all records": (test) ->
     criteria = {}
     @storage.search "test/memos", criteria, (error, hits) ->
       test.equality hits.length, 3
       test.done(error)
 
 
-  "searching critera returns matching records": (test) ->
+  "searching criteria returns matching records": (test) ->
     criteria =
       "query":
         "text":
