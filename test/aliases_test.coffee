@@ -34,7 +34,7 @@ module.exports =
     test.expect 2
     storage = new ElasticStorage
     storage.createAlias "test", null, (error, created) ->
-      test.equality error.code, 400
+      test.equality error.code, 500
       test.equality created, no
       test.done()
   
