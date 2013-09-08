@@ -6,15 +6,15 @@
     <string>org.elasticsearch.test</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/Users/craig/elastic_storage/elasticsearch-0.90.3/bin/elasticsearch</string>
+      <string>CURRENT_DIRECTORY/elasticsearch-0.90.3/bin/elasticsearch</string>
       <string>-f</string>
-      <string>-D es.config=/Users/craig/elastic_storage/elasticsearch.yml</string>
+      <string>-D es.config=CURRENT_DIRECTORY/elasticsearch.yml</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>/Users/craig/elastic_storage/elasticsearch-0.90.3</string>
+    <string>CURRENT_DIRECTORY/elasticsearch-0.90.3</string>
     <key>StandardErrorPath</key>
-    <string>/Users/craig/elastic_storage/elasticsearch-0.90.3/logs/service-err.log</string>
+    <string>CURRENT_DIRECTORY/elasticsearch-0.90.3/logs/service-err.log</string>
     <key>StandardOutPath</key>
-    <string>/Users/craig/elastic_storage/elasticsearch-0.90.3/logs/service-out.log</string>
+    <string>CURRENT_DIRECTORY/elasticsearch-0.90.3/logs/service-out.log</string>
   </dict>
 </plist>
