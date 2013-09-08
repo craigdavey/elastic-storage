@@ -104,8 +104,6 @@ class ElasticStorage
     #
     # Any other transport error halts program execution.
     request.on "error", (error) =>
-      console.error error
-      
       if request.exceededTimeLimit
         error.message = "Timeout occured after #{@timeout}ms — #{error.message}"
       switch error.code
@@ -123,6 +121,7 @@ class ElasticStorage
     # Calls `done(error, undefined, ...)` when the response is a failure.
     # `error.message` is usually a notice from the cluster that describes the problem.
     # `error.code` contains the HTTP status code.
+
     request.on "response", (response) =>
       buffer = new Buffer 0
       response.on "data", (data) =>
@@ -137,7 +136,6 @@ class ElasticStorage
           done(undefined, output, response, request)
         else
           error = @ResponseError(output.error, response.statusCode)
-          console.error error
           done(error, undefined, response, request)
 
     # Dispatch the request.

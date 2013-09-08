@@ -1,4 +1,4 @@
-# Generates a `Backbone.sync` method bound to a private storage instance.
+# Generates a `Backbone.sync` method bound to a instance of [ElasticStorage].
 # Accepts the same `options` as `ElasticStorage`:
 #
 #     Backbone.sync = ElasticStorage.setupBackboneSync
