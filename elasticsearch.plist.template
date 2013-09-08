@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>org.elasticsearch.test</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/Users/craig/elastic_storage/elasticsearch-0.90.3/bin/elasticsearch</string>
+      <string>-f</string>
+      <string>-D es.config=/Users/craig/elastic_storage/elasticsearch.yml</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/craig/elastic_storage/elasticsearch-0.90.3</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/craig/elastic_storage/elasticsearch-0.90.3/logs/service-err.log</string>
+    <key>StandardOutPath</key>
+    <string>/Users/craig/elastic_storage/elasticsearch-0.90.3/logs/service-out.log</string>
+  </dict>
+</plist>

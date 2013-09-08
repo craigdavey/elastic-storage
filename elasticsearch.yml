@@ -1,0 +1,4 @@
+cluster.name: "elastic_storage_test"
+node.name: "elastic_storage_test"
+network.host: "localhost"
+http.port: 9201

@@ -7,9 +7,11 @@
     "type": "MIT",
     "url": "https://github.com/craigdavey/elastic_storage/raw/master/License.txt"
   }],
-  "main": "src",
+  "main": "lib",
   "scripts": {
-    "test": "coffee --compile --output lib src && nodeunit test/*_test.coffee"
+    "test": "coffee --compile --output lib src && nodeunit test/*_test.coffee",
+    "start": "launchctl start org.elasticsearch.test",
+    "stop": "launchctl stop org.elasticsearch.test"
   },
   "dependencies": {
     "async": ">=0.2.6",
