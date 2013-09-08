@@ -85,7 +85,6 @@ class ElasticStorage
   # All HTTP traffic is routed through the `request` method.
   # It constructs a request defined by `method` and `options` and prepares handlers for success and error conditions.
   request: (method, options={}) ->
-    
     {path, body, done} = options
     request = HTTP.request {method, path, @host, @port}
     request.setHeader "accept", "application/json"
