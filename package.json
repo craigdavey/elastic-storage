@@ -2,11 +2,7 @@
   "name": "elastic_storage",
   "version": "0.0.1",
   "description": "Minimalist elasticsearch library.",
-  "author": "Craig Davey",
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/craigdavey/elastic_storage/raw/master/License.txt"
-  }],
+  "licenses": "Unlicense",
   "main": "lib",
   "scripts": {
     "test": "coffee --compile --output lib src && nodeunit test/*_test.coffee",
