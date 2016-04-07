@@ -1,81 +1,70 @@
-<!DOCTYPE html>
+<!DOCTYPE html><meta charset="UTF-8">
+<title>index.coffee</title>
+<style media="screen">
 
-<html>
-<head>
-  <title>index.coffee</title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="docs.css" />
-</head>
-<body>
-  <div id="container">
-    <div id="background"></div>
-    
-      <ul id="jump_to">
-        <li>
-          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
-          <a class="small" href="javascript:void(0);">+</a>
-          <div id="jump_wrapper">
-          <div id="jump_page_wrapper">
-            <div id="jump_page">
-              
-                
-                <a class="source" href="aliases.html">
-                  aliases.coffee
-                </a>
-              
-                
-                <a class="source" href="backbone_sync.html">
-                  backbone_sync.coffee
-                </a>
-              
-                
-                <a class="source" href="core.html">
-                  core.coffee
-                </a>
-              
-                
-                <a class="source" href="crud.html">
-                  crud.coffee
-                </a>
-              
-                
-                <a class="source" href="index.html">
-                  index.coffee
-                </a>
-              
-                
-                <a class="source" href="indices.html">
-                  indices.coffee
-                </a>
-              
-                
-                <a class="source" href="scan.html">
-                  scan.coffee
-                </a>
-              
-            </div>
-          </div>
-        </li>
-      </ul>
-    
-    <ul class="sections">
-        
-          <li id="title">
-              <div class="annotation">
-                  <h1>index.coffee</h1>
-              </div>
-          </li>
-        
-        
-        
-        <li id="section-1">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-1">&#182;</a>
-              </div>
-              <p><code>ElasticStorage</code> instances provide methods to communicate with an <a href="http://www.elasticsearch.org">elasticsearch</a>
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, tt, code, blockquote {
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+/* TYPE */
+
+body, h1, h2, h3, h4, h5, h6 {
+  font: 18px/25px Optima, sans-serif;
+}
+pre, code, #code_background {
+  font: 16px/25px Consolas, "PT Mono", monospace;
+}
+h1, h2, h3, h4, h5, h6, body > nav a {
+  font-weight: bold;
+}
+:not(pre) > code { padding: 2px;}
+
+/* PAINT */
+
+body { background: hsl(0, 0%, 20%); }
+td.text { background: white; color: black; }
+td.code, code, pre { background: hsl(200, 33%, 95%); }
+.hljs-string, .hljs-regexp, .hljs-literal, .hljs-keyword { color: hsl(160, 99%, 33%); }
+a { color: inherit; }
+body > nav a { color:hsla(0, 0%, 100%, 0.25); }
+body > nav a[href] { color:hsla(0, 0%, 100%, 0.75);}
+body > nav a[href]:hover { color: white;}
+
+/* LAYOUT */
+
+body { max-width:1350px; }
+body > h1 { position: absolute; left: 25px; top: 25px; }
+body > nav { padding: 25px; }
+body > nav a { text-decoration: none; }
+table { border-collapse: collapse; border-spacing: 0; width: 100%;}
+td { padding: 0px; }
+td.text { min-width: 550px; width: 33%; vertical-align: top; }
+td.text h1 { margin: 25px; }
+td.text h2 { margin: 25px; }
+td.text p { margin: 25px; }
+td.text pre { padding: 10px; margin: 25px; }
+td.code { min-width: 550px; width: 67%; white-space: nowrap; vertical-align: top; }
+td.code pre { margin: 25px; }
+#section-1 td.text { padding-top: 50px; }
+
+@media screen and (min-width: 1350px) { body { margin: 15px auto; } }
+@media screen and (min-width: 1380px) { body { margin: 15px 15px 15px auto; } }
+@media screen and (min-width: 1450px) { body > nav { position: fixed; left: 0px; top: 15px; z-index: -1; } }
+@media screen and (min-width: 1550px) { body { margin: 15px auto 15px 200px; } }
+
+</style>
+
+<h1>index.coffee</h1>
+
+<table>
+
+  
+  <tr id="section-1">
+    <td class="text">
+      
+      <p><code>ElasticStorage</code> instances provide methods to communicate with an <a href="http://www.elasticsearch.org">elasticsearch</a>
 cluster from a <a href="http://nodejs.org/">Node</a> programming environment. Require the
 constructor in your program and then construct a new <code>storage</code> instance to work
 with, like this:</p>
@@ -88,9 +77,9 @@ by default. You can configure a different network address with the <code>host</c
   host: <span class="hljs-string">"elasticsearch.host"</span>
   port: <span class="hljs-number">8080</span>
 </code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>
 HTTP     = <span class="hljs-built_in">require</span> <span class="hljs-string">"http"</span>
 {extend} = <span class="hljs-built_in">require</span> <span class="hljs-string">"underscore"</span>
 
@@ -104,199 +93,170 @@ HTTP     = <span class="hljs-built_in">require</span> <span class="hljs-string">
   timeout: <span class="hljs-number">0</span>
 
   constructor: <span class="hljs-function"><span class="hljs-params">(options={})</span> -&gt;</span>
-    extend <span class="hljs-keyword">this</span>, options</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
-              </div>
-              <h2 id="-index-records-and-search-them-out-core-html-"><a href="core.html">Index records and search them out</a></h2>
+    extend <span class="hljs-keyword">this</span>, options</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-2">
+    <td class="text">
+      
+      <h2 id="-index-records-and-search-them-out-core-html-"><a href="core.html">Index records and search them out</a></h2>
 <pre><code>storage.index address, attributes, ƒ
 storage.search address, criteria, ƒ
 </code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./core"</span>)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-3">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
-              </div>
-              <h2 id="-read-and-write-records-like-a-conventional-database-crud-html-"><a href="crud.html">Read and write records like a conventional database</a></h2>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./core"</span>)</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-3">
+    <td class="text">
+      
+      <h2 id="-read-and-write-records-like-a-conventional-database-crud-html-"><a href="crud.html">Read and write records like a conventional database</a></h2>
 <pre><code>storage.read address, ƒ
 storage.read address, criteria, ƒ
 storage.create address, attributes, ƒ
 storage.update address, attributes, ƒ
 storage.<span class="hljs-keyword">delete</span> address, ƒ
 </code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./crud"</span>)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <h2 id="-administer-the-indices-in-your-cluster-indices-html-"><a href="indices.html">Administer the indices in your cluster</a></h2>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./crud"</span>)</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-4">
+    <td class="text">
+      
+      <h2 id="-administer-the-indices-in-your-cluster-indices-html-"><a href="indices.html">Administer the indices in your cluster</a></h2>
 <pre><code>storage.init address, ƒ
 storage.drop address, ƒ
 storage.refresh address, ƒ
 storage.has address, ƒ
 storage.fetchIndices ƒ
 </code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./indices"</span>)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
-              <h2 id="-aliases-make-it-easy-to-go-from-one-index-to-the-next-aliases-html-"><a href="aliases.html">Aliases make it easy to go from one index to the next</a> !!!</h2>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./indices"</span>)</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-5">
+    <td class="text">
+      
+      <h2 id="-aliases-make-it-easy-to-go-from-one-index-to-the-next-aliases-html-"><a href="aliases.html">Aliases make it easy to go from one index to the next</a> !!!</h2>
 <pre><code>storage.migrate alias, currentIndex, nextIndex, ƒ
 storage.createAlias alias, ƒ
 storage.deleteAlias alias, ƒ
 storage.fetchAliases ƒ
 </code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./aliases"</span>)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-6">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <h2 id="-utility-to-iterate-over-all-records-within-an-address-scan-html-"><a href="scan.html">Utility to iterate over all records within an address</a></h2>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./aliases"</span>)</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-6">
+    <td class="text">
+      
+      <h2 id="-utility-to-iterate-over-all-records-within-an-address-scan-html-"><a href="scan.html">Utility to iterate over all records within an address</a></h2>
 <pre><code>storage.scan address,
   forEach: <span class="hljs-function"><span class="hljs-params">(record)</span> -&gt;</span>
   done: ƒ
 </code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./scan"</span>)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-7">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
-              </div>
-              <h2 id="-synchronize-with-backbone-backbone_sync-html-"><a href="backbone_sync.html">Synchronize with Backbone</a></h2>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  extend @prototype, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./scan"</span>)</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-7">
+    <td class="text">
+      
+      <h2 id="-synchronize-with-backbone-backbone_sync-html-"><a href="backbone_sync.html">Synchronize with Backbone</a></h2>
 <pre><code>Backbone.sync = ElasticStorage.setupBackboneSync()
 </code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  extend <span class="hljs-keyword">this</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./backbone_sync"</span>)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <hr>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  extend <span class="hljs-keyword">this</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./backbone_sync"</span>)</pre></div>
+    </td>
+  </tr>
 
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-10">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
-              </div>
-              <p>All HTTP traffic is routed through the <code>request</code> method.
+  
+  <tr id="section-8">
+    <td class="text">
+      
+      <hr>
+
+    </td>
+    <td class="code">
+      <div class='highlight'><pre></pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-9">
+    <td class="text">
+      
+      
+    </td>
+    <td class="code">
+      <div class='highlight'><pre></pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-10">
+    <td class="text">
+      
+      <p>All HTTP traffic is routed through the <code>request</code> method.
 It constructs a request defined by <code>method</code> and <code>options</code> and prepares handlers for success and error conditions.</p>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  request: <span class="hljs-function"><span class="hljs-params">(method, options={})</span> -&gt;</span>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  request: <span class="hljs-function"><span class="hljs-params">(method, options={})</span> -&gt;</span>
     {path, body, done} = options
     request = HTTP.request {method, path, @host, @port}
     request.setHeader <span class="hljs-string">"accept"</span>, <span class="hljs-string">"application/json"</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> body <span class="hljs-keyword">is</span> <span class="hljs-string">"object"</span> <span class="hljs-keyword">then</span> body = JSON.stringify(body)
-    <span class="hljs-keyword">if</span> body <span class="hljs-keyword">then</span> request.write body</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-11">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
-              </div>
-              <p>Stop the request if it exceeds the time limit. <code>request.abort()</code> triggers
+    <span class="hljs-keyword">if</span> body <span class="hljs-keyword">then</span> request.write body</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-11">
+    <td class="text">
+      
+      <p>Stop the request if it exceeds the time limit. <code>request.abort()</code> triggers
 an <code>&quot;error&quot;</code> event that will be handled in the next section.</p>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    request.setTimeout @timeout, <span class="hljs-function">-&gt;</span>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>    request.setTimeout @timeout, <span class="hljs-function">-&gt;</span>
       request.exceededTimeLimit = <span class="hljs-literal">true</span>
-      request.abort()</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-12">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
-              </div>
-              <p>When a transport error occurs, first, clarify the <code>error.message</code> if the event was triggered by a timeout.</p>
+      request.abort()</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-12">
+    <td class="text">
+      
+      <p>When a transport error occurs, first, clarify the <code>error.message</code> if the event was triggered by a timeout.</p>
 <p>If the connection was refused or reset call <code>done(error, ...)</code> with an <code>error</code> that summarizes the problem.
 In this case the <code>output</code> and <code>response</code> arguments are both <code>undefined</code> because the <code>error</code> occured before a <code>response</code> arrived.</p>
 <p>Any other transport error halts program execution.</p>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    request.<span class="hljs-literal">on</span> <span class="hljs-string">"error"</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>    request.<span class="hljs-literal">on</span> <span class="hljs-string">"error"</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
       <span class="hljs-keyword">if</span> request.exceededTimeLimit
         error.message = <span class="hljs-string">"Timeout occured after <span class="hljs-subst">#{@timeout}</span>ms — <span class="hljs-subst">#{error.message}</span>"</span>
       <span class="hljs-keyword">switch</span> error.code
@@ -304,27 +264,24 @@ In this case the <code>output</code> and <code>response</code> arguments are bot
           error = @ConnectionError(error)
           done(error, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">undefined</span>, request)
         <span class="hljs-keyword">else</span>
-          <span class="hljs-keyword">throw</span> @UnexpectedError(error)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-13">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
-              </div>
-              <p>Buffer response data as it arrives and <code>JSON.parse</code> when it’s complete.</p>
+          <span class="hljs-keyword">throw</span> @UnexpectedError(error)</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-13">
+    <td class="text">
+      
+      <p>Buffer response data as it arrives and <code>JSON.parse</code> when it’s complete.</p>
 <p>Calls <code>done(undefined, output, ...)</code> when the response is OK.
 <code>output</code> is the parsed response data.</p>
 <p>Calls <code>done(error, undefined, ...)</code> when the response is a failure.
 <code>error.message</code> is usually a notice from the cluster that describes the problem.
 <code>error.code</code> contains the HTTP status code.</p>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>
     request.<span class="hljs-literal">on</span> <span class="hljs-string">"response"</span>, <span class="hljs-function"><span class="hljs-params">(response)</span> =&gt;</span>
       buffer = <span class="hljs-keyword">new</span> Buffer <span class="hljs-number">0</span>
       response.<span class="hljs-literal">on</span> <span class="hljs-string">"data"</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> =&gt;</span>
@@ -339,144 +296,160 @@ In this case the <code>output</code> and <code>response</code> arguments are bot
           done(<span class="hljs-literal">undefined</span>, output, response, request)
         <span class="hljs-keyword">else</span>
           error = @ResponseError(output.error, response.statusCode)
-          done(error, <span class="hljs-literal">undefined</span>, response, request)</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-14">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
-              </div>
-              <p>Dispatch the request.</p>
+          done(error, <span class="hljs-literal">undefined</span>, response, request)</pre></div>
+    </td>
+  </tr>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    request.end()</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-15">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
-              </div>
-              <p>Returns a friendly description of the request.</p>
+  
+  <tr id="section-14">
+    <td class="text">
+      
+      <p>Dispatch the request.</p>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-string">"<span class="hljs-subst">#{request.method}</span> /<span class="hljs-subst">#{request.path}</span>"</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-16">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
-              </div>
-              <hr>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>    request.end()</pre></div>
+    </td>
+  </tr>
 
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-17">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-18">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
-              </div>
-              <p>Construct an error that summarizes a connection problem.</p>
+  
+  <tr id="section-15">
+    <td class="text">
+      
+      <p>Returns a friendly description of the request.</p>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  ConnectionError: <span class="hljs-function"><span class="hljs-params">(originalError)</span> -&gt;</span>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>    <span class="hljs-string">"<span class="hljs-subst">#{request.method}</span> /<span class="hljs-subst">#{request.path}</span>"</span></pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-16">
+    <td class="text">
+      
+      <hr>
+
+    </td>
+    <td class="code">
+      <div class='highlight'><pre></pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-17">
+    <td class="text">
+      
+      
+    </td>
+    <td class="code">
+      <div class='highlight'><pre></pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-18">
+    <td class="text">
+      
+      <p>Construct an error that summarizes a connection problem.</p>
+
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  ConnectionError: <span class="hljs-function"><span class="hljs-params">(originalError)</span> -&gt;</span>
     intro = <span class="hljs-string">"ElasticStorage can’t connect to http://<span class="hljs-subst">#{@host}</span>:<span class="hljs-subst">#{@port}</span>/"</span>
     error = <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{intro}</span> — <span class="hljs-subst">#{originalError.message}</span>"</span>
     error.code = originalError.code
     error.syscall = originalError.syscall
-    <span class="hljs-keyword">return</span> error</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-19">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
-              </div>
-              <p>Construct an error that summarizes an unexpected occurence.</p>
+    <span class="hljs-keyword">return</span> error</pre></div>
+    </td>
+  </tr>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  UnexpectedError: <span class="hljs-function"><span class="hljs-params">(originalError)</span> -&gt;</span>
+  
+  <tr id="section-19">
+    <td class="text">
+      
+      <p>Construct an error that summarizes an unexpected occurence.</p>
+
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  UnexpectedError: <span class="hljs-function"><span class="hljs-params">(originalError)</span> -&gt;</span>
     intro = <span class="hljs-string">"Unexpected error occured"</span>
     error = <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{intro}</span> — <span class="hljs-subst">#{originalError.message}</span>"</span>
     error.code = originalError.code
     error.syscall = originalError.syscall
-    <span class="hljs-keyword">return</span> error</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-20">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
-              </div>
-              <p>Construct an error that summarizes a HTTP failure response.</p>
+    <span class="hljs-keyword">return</span> error</pre></div>
+    </td>
+  </tr>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  ResponseError: <span class="hljs-function"><span class="hljs-params">(message, code)</span> -&gt;</span>
+  
+  <tr id="section-20">
+    <td class="text">
+      
+      <p>Construct an error that summarizes a HTTP failure response.</p>
+
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  ResponseError: <span class="hljs-function"><span class="hljs-params">(message, code)</span> -&gt;</span>
     error = <span class="hljs-keyword">new</span> Error message
     error.code = code
-    <span class="hljs-keyword">return</span> error</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-21">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
-              </div>
-              <p><code>defaultCallback</code> is used when a storage method is called without a callback
+    <span class="hljs-keyword">return</span> error</pre></div>
+    </td>
+  </tr>
+
+  
+  <tr id="section-21">
+    <td class="text">
+      
+      <p><code>defaultCallback</code> is used when a storage method is called without a callback
 argument. It’s provided for convenience when you’re working in the console.</p>
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  defaultCallback: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre>  defaultCallback: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
     status = <span class="hljs-keyword">if</span> response <span class="hljs-keyword">then</span> HTTP.STATUS_CODES[response.statusCode] <span class="hljs-keyword">else</span> response
     <span class="hljs-built_in">console</span>.info status
     <span class="hljs-built_in">console</span>.info output <span class="hljs-keyword">if</span> output
-    <span class="hljs-built_in">console</span>.error error <span class="hljs-keyword">if</span> error</pre></div></div>
-            
-        </li>
-        
-    </ul>
-  </div>
-</body>
-</html>
+    <span class="hljs-built_in">console</span>.error error <span class="hljs-keyword">if</span> error</pre></div>
+    </td>
+  </tr>
+
+</table>
+
+<nav>
+
+  
+  <div><a class="source" href="aliases.html"">
+    aliases.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="backbone_sync.html"">
+    backbone_sync.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="core.html"">
+    core.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="crud.html"">
+    crud.coffee
+  </a></div>
+
+  
+  <div><a class="source" ">
+    index.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="indices.html"">
+    indices.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="scan.html"">
+    scan.coffee
+  </a></div>
+
+</nav>

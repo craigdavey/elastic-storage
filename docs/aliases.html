@@ -1,84 +1,73 @@
-<!DOCTYPE html>
+<!DOCTYPE html><meta charset="UTF-8">
+<title>aliases.coffee</title>
+<style media="screen">
 
-<html>
-<head>
-  <title>aliases.coffee</title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="docs.css" />
-</head>
-<body>
-  <div id="container">
-    <div id="background"></div>
-    
-      <ul id="jump_to">
-        <li>
-          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
-          <a class="small" href="javascript:void(0);">+</a>
-          <div id="jump_wrapper">
-          <div id="jump_page_wrapper">
-            <div id="jump_page">
-              
-                
-                <a class="source" href="aliases.html">
-                  aliases.coffee
-                </a>
-              
-                
-                <a class="source" href="backbone_sync.html">
-                  backbone_sync.coffee
-                </a>
-              
-                
-                <a class="source" href="core.html">
-                  core.coffee
-                </a>
-              
-                
-                <a class="source" href="crud.html">
-                  crud.coffee
-                </a>
-              
-                
-                <a class="source" href="index.html">
-                  index.coffee
-                </a>
-              
-                
-                <a class="source" href="indices.html">
-                  indices.coffee
-                </a>
-              
-                
-                <a class="source" href="scan.html">
-                  scan.coffee
-                </a>
-              
-            </div>
-          </div>
-        </li>
-      </ul>
-    
-    <ul class="sections">
-        
-          <li id="title">
-              <div class="annotation">
-                  <h1>aliases.coffee</h1>
-              </div>
-          </li>
-        
-        
-        
-        <li id="section-1">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-1">&#182;</a>
-              </div>
-              
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports =
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, tt, code, blockquote {
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+/* TYPE */
+
+body, h1, h2, h3, h4, h5, h6 {
+  font: 18px/25px Optima, sans-serif;
+}
+pre, code, #code_background {
+  font: 16px/25px Consolas, "PT Mono", monospace;
+}
+h1, h2, h3, h4, h5, h6, body > nav a {
+  font-weight: bold;
+}
+:not(pre) > code { padding: 2px;}
+
+/* PAINT */
+
+body { background: hsl(0, 0%, 20%); }
+td.text { background: white; color: black; }
+td.code, code, pre { background: hsl(200, 33%, 95%); }
+.hljs-string, .hljs-regexp, .hljs-literal, .hljs-keyword { color: hsl(160, 99%, 33%); }
+a { color: inherit; }
+body > nav a { color:hsla(0, 0%, 100%, 0.25); }
+body > nav a[href] { color:hsla(0, 0%, 100%, 0.75);}
+body > nav a[href]:hover { color: white;}
+
+/* LAYOUT */
+
+body { max-width:1350px; }
+body > h1 { position: absolute; left: 25px; top: 25px; }
+body > nav { padding: 25px; }
+body > nav a { text-decoration: none; }
+table { border-collapse: collapse; border-spacing: 0; width: 100%;}
+td { padding: 0px; }
+td.text { min-width: 550px; width: 33%; vertical-align: top; }
+td.text h1 { margin: 25px; }
+td.text h2 { margin: 25px; }
+td.text p { margin: 25px; }
+td.text pre { padding: 10px; margin: 25px; }
+td.code { min-width: 550px; width: 67%; white-space: nowrap; vertical-align: top; }
+td.code pre { margin: 25px; }
+#section-1 td.text { padding-top: 50px; }
+
+@media screen and (min-width: 1350px) { body { margin: 15px auto; } }
+@media screen and (min-width: 1380px) { body { margin: 15px 15px 15px auto; } }
+@media screen and (min-width: 1450px) { body > nav { position: fixed; left: 0px; top: 15px; z-index: -1; } }
+@media screen and (min-width: 1550px) { body { margin: 15px auto 15px 200px; } }
+
+</style>
+
+<h1>aliases.coffee</h1>
+
+<table>
+
+  
+  <tr id="section-1">
+    <td class="text">
+      
+      
+    </td>
+    <td class="code">
+      <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports =
 
   migrate: <span class="hljs-function"><span class="hljs-params">(alias, currentIndex, newIndex, callback=@defaultCallback)</span> -&gt;</span>
     alias = alias.toString()
@@ -119,11 +108,47 @@
       path: <span class="hljs-string">"_aliases"</span>
       body: {actions}
       done: <span class="hljs-function"><span class="hljs-params">(error, response)</span> -&gt;</span>
-        callback error, response?[<span class="hljs-string">"acknowledged"</span>]?</pre></div></div>
-            
-        </li>
-        
-    </ul>
-  </div>
-</body>
-</html>
+        callback error, response?[<span class="hljs-string">"acknowledged"</span>]?</pre></div>
+    </td>
+  </tr>
+
+</table>
+
+<nav>
+
+  
+  <div><a class="source" ">
+    aliases.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="backbone_sync.html"">
+    backbone_sync.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="core.html"">
+    core.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="crud.html"">
+    crud.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="index.html"">
+    index.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="indices.html"">
+    indices.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="scan.html"">
+    scan.coffee
+  </a></div>
+
+</nav>
