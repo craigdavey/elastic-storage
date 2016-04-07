@@ -1,6 +1,6 @@
 default: setup docs
 
-docs:
+docs: src/*.coffee
 	docco --css docs.css --layout parallel src/*
 
 setup: elasticsearch-0.90.3 elasticsearch.plist
