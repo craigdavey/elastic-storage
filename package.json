@@ -16,6 +16,7 @@
   "devDependencies": {
     "backbone": "*",
     "coffee-script": "*",
+    "docco": "*",
     "nodeunit": "*"
   }
 }

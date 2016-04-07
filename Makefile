@@ -1,3 +1,8 @@
+default: setup docs
+
+docs:
+	docco --css docs.css --layout parallel src/*
+
 setup: elasticsearch-0.90.3 elasticsearch.plist
 
 elasticsearch-0.90.3:
