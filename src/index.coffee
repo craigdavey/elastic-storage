@@ -74,11 +74,11 @@ class ElasticStorage
   #
   extend @prototype, require("./scan")
 
-  # ##  [Synchronize with Backbone](backbone_sync.html)
+  # ##  [Synchronize with Backbone](sync.html)
   #
   #     Backbone.sync = ElasticStorage.setupBackboneSync()
   #
-  extend this, require("./backbone_sync")
+  extend this, require("./sync")
 
   # ---
 

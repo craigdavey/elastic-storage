@@ -1,0 +1,167 @@
+<!DOCTYPE html><meta charset="UTF-8">
+<title>sync.coffee</title>
+<style media="screen">
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, pre, tt, code, blockquote {
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+/* TYPE */
+
+body, h1, h2, h3, h4, h5, h6 {
+  font: 18px/25px Optima, sans-serif;
+}
+pre, code, #code_background {
+  font: 16px/25px Consolas, "PT Mono", monospace;
+}
+h1, h2, h3, h4, h5, h6, body > nav a {
+  font-weight: bold;
+}
+:not(pre) > code { padding: 2px;}
+
+/* PAINT */
+
+body { background: hsl(0, 0%, 20%); }
+td.text { background: white; color: black; }
+td.code, code, pre { background: hsl(200, 33%, 95%); }
+.hljs-string, .hljs-regexp, .hljs-literal, .hljs-keyword { color: hsl(160, 99%, 33%); }
+a { color: inherit; }
+body > nav a { color:hsla(0, 0%, 100%, 0.25); }
+body > nav a[href] { color:hsla(0, 0%, 100%, 0.75);}
+body > nav a[href]:hover { color: white;}
+
+/* LAYOUT */
+
+body { max-width:1350px; }
+body > h1 { position: absolute; left: 25px; top: 25px; }
+body > nav { padding: 25px; }
+body > nav a { text-decoration: none; }
+table { border-collapse: collapse; border-spacing: 0; width: 100%;}
+td { padding: 0px; }
+td.text { min-width: 550px; width: 33%; vertical-align: top; }
+td.text h1 { margin: 25px; }
+td.text h2 { margin: 25px; }
+td.text p { margin: 25px; }
+td.text pre { padding: 10px; margin: 25px; }
+td.code { min-width: 550px; width: 67%; white-space: nowrap; vertical-align: top; }
+td.code pre { margin: 25px; }
+#section-1 td.text { padding-top: 50px; }
+
+@media screen and (min-width: 1350px) { body { margin: 15px auto; } }
+@media screen and (min-width: 1380px) { body { margin: 15px 15px 15px auto; } }
+@media screen and (min-width: 1450px) { body > nav { position: fixed; left: 0px; top: 15px; z-index: -1; } }
+@media screen and (min-width: 1550px) { body { margin: 15px auto 15px 200px; } }
+
+</style>
+
+<h1>sync.coffee</h1>
+
+<table>
+
+  
+  <tr id="section-1">
+    <td class="text">
+      
+      <p>Generates a <code>Backbone.sync</code> method bound to a instance of [ElasticStorage].
+Accepts the same <code>options</code> as <code>ElasticStorage</code>:</p>
+<pre><code>Backbone.sync = ElasticStorage.setupBackboneSync
+  host: <span class="hljs-string">"storage.example.com"</span>
+  port: <span class="hljs-number">9200</span>
+</code></pre><p>If your model (or collection) defines a <code>storageAddress</code> it will be used
+as the <code>address</code> argument for storage methods. If there is no <code>storageAddress</code>
+the object’s <code>url</code> will be used instead. You should probably define both
+methods if your models are used in multiple environments. Use <code>model.url()</code>
+on the client side and <code>model.storageAddress()</code> on the server:</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Memo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Backbone</span>.<span class="hljs-title">Model</span></span>
+  storageAddress: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-string">"app/<span class="hljs-subst">#{@url()}</span>"</span>
+
+  url: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">if</span> @isNew()
+      <span class="hljs-string">"memos"</span>
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-string">"memos/<span class="hljs-subst">#{@id}</span>"</span>
+</code></pre><p>Define <code>criteria</code> on any collections that should be reduced or sorted. 
+Specify your <code>criteria</code> with the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/">query DSL</a>.</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArchivedMemos</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Backbone</span>.<span class="hljs-title">Collection</span></span>
+  storageAddress: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-string">"app/memos"</span>
+
+  criteria: <span class="hljs-function">-&gt;</span>
+    filter: {exists: {field: <span class="hljs-string">"archived_at"</span>}}
+    sort: {<span class="hljs-string">"updated_at"</span>: {order:<span class="hljs-string">"desc"</span>}}
+    size: <span class="hljs-number">100</span>
+</code></pre>
+    </td>
+    <td class="code">
+      <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports.setupBackboneSync = <span class="hljs-function"><span class="hljs-params">(options={})</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> options <span class="hljs-keyword">instanceof</span> <span class="hljs-keyword">this</span>
+    storage = options
+  <span class="hljs-keyword">else</span>
+    storage = <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span> options
+  
+  <span class="hljs-keyword">return</span> (method, object, options={}) -&gt;
+    address = getValue(object, <span class="hljs-string">"storageAddress"</span>) <span class="hljs-keyword">or</span> getValue(object, <span class="hljs-string">"url"</span>)
+    
+    input = <span class="hljs-keyword">switch</span> method
+      <span class="hljs-keyword">when</span> <span class="hljs-string">"read"</span>
+        getValue(object, <span class="hljs-string">"criteria"</span>)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">"create"</span>, <span class="hljs-string">"update"</span>
+        object.toJSON()
+    
+    storage[method] address, input, <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+      <span class="hljs-keyword">if</span> error <span class="hljs-keyword">is</span> <span class="hljs-literal">undefined</span>
+        <span class="hljs-keyword">if</span> options.success <span class="hljs-keyword">then</span> options.success(object, output, options)
+        object.trigger(<span class="hljs-string">"sync"</span>, object, output, options)
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">if</span> options.error <span class="hljs-keyword">then</span> options.error(object, request, options)
+        object.trigger(<span class="hljs-string">"error"</span>, object, request, options)
+<span class="hljs-function">
+
+<span class="hljs-title">getValue</span> = <span class="hljs-params">(object, member)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> object[member]?.call <span class="hljs-keyword">then</span> object[member]() <span class="hljs-keyword">else</span> object[member]</pre></div>
+    </td>
+  </tr>
+
+</table>
+
+<nav>
+
+  
+  <div><a class="source" href="aliases.html"">
+    aliases.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="core.html"">
+    core.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="crud.html"">
+    crud.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="index.html"">
+    index.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="indices.html"">
+    indices.coffee
+  </a></div>
+
+  
+  <div><a class="source" href="scan.html"">
+    scan.coffee
+  </a></div>
+
+  
+  <div><a class="source" ">
+    sync.coffee
+  </a></div>
+
+</nav>
