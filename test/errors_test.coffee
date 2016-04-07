@@ -17,7 +17,7 @@ module.exports =
     storage.init "test", (error) ->
       test.assert error instanceof Error
       test.equality error.message, """
-        ElasticStorage can’t connect to http://localhost:1/ — connect ECONNREFUSED
+        ElasticStorage can’t connect to http://localhost:1/ — connect ECONNREFUSED 127.0.0.1:1
       """
       test.equality error.code, "ECONNREFUSED"
       test.done()
