@@ -10,15 +10,15 @@
   "main": "lib",
   "scripts": {
     "test": "coffee --compile --output lib src && nodeunit test/*_test.coffee",
-    "start": "launchctl start org.elasticsearch.test",
-    "stop": "launchctl stop org.elasticsearch.test"
+    "start": "launchctl start elasticsearch.plist",
+    "stop": "launchctl stop elasticsearch.plist"
   },
   "dependencies": {
-    "async": ">=0.2.6",
-    "underscore": ">=1.4.4"
+    "async": "*",
+    "underscore": "*"
   },
   "devDependencies": {
-    "backbone": ">=0.9.10",
+    "backbone": "*",
     "coffee-script": "*",
     "nodeunit": "*"
   }
