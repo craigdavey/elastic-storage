@@ -121,7 +121,6 @@ class ElasticStorage
     # Calls `done(error, undefined, ...)` when the response is a failure.
     # `error.message` is usually a notice from the cluster that describes the problem.
     # `error.code` contains the HTTP status code.
-
     request.on "response", (response) =>
       buffer = new Buffer 0
       response.on "data", (data) =>
