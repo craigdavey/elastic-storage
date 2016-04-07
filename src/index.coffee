@@ -1,13 +1,13 @@
-# `ElasticStorage` instances provide methods to communicate with an [elasticsearch](http://www.elasticsearch.org) 
-# cluster from a [Node](http://nodejs.org/) programming environment. Require the 
-# constructor in your program and then construct a new `storage` instance to work 
+# `ElasticStorage` instances provide methods to communicate with an [elasticsearch](http://www.elasticsearch.org)
+# cluster from a [Node](http://nodejs.org/) programming environment. Require the
+# constructor in your program and then construct a new `storage` instance to work
 # with, like this:
 #
 #     ElasticStorage = require "elastic_storage"
 #     storage = new ElasticStorage
 #
-# Instances are configured to use an elasticsearch cluster at `http://localhost:9200/` 
-# by default. You can configure a different network address with the `host` and 
+# Instances are configured to use an elasticsearch cluster at `http://localhost:9200/`
+# by default. You can configure a different network address with the `host` and
 # `port` options when you construct a new instance:
 #
 #     storage = new ElasticStorage
@@ -20,7 +20,7 @@ HTTP     = require "http"
 
 class ElasticStorage
   module.exports = this
-  
+
   host: "localhost"
 
   port: 9200
@@ -30,14 +30,14 @@ class ElasticStorage
   constructor: (options={}) ->
     extend this, options
 
-  # ##  [Index records and search them out](core.coffee)
+  # ##  [Index records and search them out](core.html)
   #
   #     storage.index address, attributes, ƒ
   #     storage.search address, criteria, ƒ
   #
   extend @prototype, require("./core")
 
-  # ##  [Read and write records like a conventional database](crud.coffee)
+  # ##  [Read and write records like a conventional database](crud.html)
   #
   #     storage.read address, ƒ
   #     storage.read address, criteria, ƒ
@@ -47,7 +47,7 @@ class ElasticStorage
   #
   extend @prototype, require("./crud")
 
-  # ##  [Administer the indices in your cluster](indices.coffee)
+  # ##  [Administer the indices in your cluster](indices.html)
   #
   #     storage.init address, ƒ
   #     storage.drop address, ƒ
@@ -57,7 +57,7 @@ class ElasticStorage
   #
   extend @prototype, require("./indices")
 
-  # ##  [Aliases make it easy to go from one index to the next](aliases.coffee) !!!
+  # ##  [Aliases make it easy to go from one index to the next](aliases.html) !!!
   #
   #     storage.migrate alias, currentIndex, nextIndex, ƒ
   #     storage.createAlias alias, ƒ
@@ -66,29 +66,29 @@ class ElasticStorage
   #
   extend @prototype, require("./aliases")
 
-  # ##  [Utility to iterate over all records within an address](scan.coffee)
-  # 
+  # ##  [Utility to iterate over all records within an address](scan.html)
+  #
   #     storage.scan address,
   #       forEach: (record) ->
   #       done: ƒ
   #
   extend @prototype, require("./scan")
 
-  # ##  [Synchronize with Backbone](backbone_sync.coffee)
-  # 
+  # ##  [Synchronize with Backbone](backbone_sync.html)
+  #
   #     Backbone.sync = ElasticStorage.setupBackboneSync()
   #
   extend this, require("./backbone_sync")
 
   # ---
-  
+
   # All HTTP traffic is routed through the `request` method.
   # It constructs a request defined by `method` and `options` and prepares handlers for success and error conditions.
   request: (method, options={}) ->
     {path, body, done} = options
     request = HTTP.request {method, path, @host, @port}
     request.setHeader "accept", "application/json"
-    if typeof body is "object" then body = JSON.stringify(body) 
+    if typeof body is "object" then body = JSON.stringify(body)
     if body then request.write body
 
     # Stop the request if it exceeds the time limit. `request.abort()` triggers
@@ -98,7 +98,7 @@ class ElasticStorage
       request.abort()
 
     # When a transport error occurs, first, clarify the `error.message` if the event was triggered by a timeout.
-    # 
+    #
     # If the connection was refused or reset call `done(error, ...)` with an `error` that summarizes the problem.
     # In this case the `output` and `response` arguments are both `undefined` because the `error` occured before a `response` arrived.
     #

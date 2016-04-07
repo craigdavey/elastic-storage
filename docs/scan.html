@@ -16,43 +16,45 @@
           <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
           <a class="small" href="javascript:void(0);">+</a>
           <div id="jump_wrapper">
-          <div id="jump_page">
-            
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
               
-              <a class="source" href="aliases.html">
-                aliases.coffee
-              </a>
-            
+                
+                <a class="source" href="aliases.html">
+                  aliases.coffee
+                </a>
               
-              <a class="source" href="backbone_sync.html">
-                backbone_sync.coffee
-              </a>
-            
+                
+                <a class="source" href="backbone_sync.html">
+                  backbone_sync.coffee
+                </a>
               
-              <a class="source" href="core.html">
-                core.coffee
-              </a>
-            
+                
+                <a class="source" href="core.html">
+                  core.coffee
+                </a>
               
-              <a class="source" href="crud.html">
-                crud.coffee
-              </a>
-            
+                
+                <a class="source" href="crud.html">
+                  crud.coffee
+                </a>
               
-              <a class="source" href="index.html">
-                index.coffee
-              </a>
-            
+                
+                <a class="source" href="index.html">
+                  index.coffee
+                </a>
               
-              <a class="source" href="indices.html">
-                indices.coffee
-              </a>
-            
+                
+                <a class="source" href="indices.html">
+                  indices.coffee
+                </a>
               
-              <a class="source" href="scan.html">
-                scan.coffee
-              </a>
-            
+                
+                <a class="source" href="scan.html">
+                  scan.coffee
+                </a>
+              
+            </div>
           </div>
         </li>
       </ul>
@@ -77,8 +79,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>{extend} = require <span class="string">"underscore"</span>
-{waterfall} = require <span class="string">"async"</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+{extend} = <span class="hljs-built_in">require</span> <span class="hljs-string">"underscore"</span>
+{waterfall} = <span class="hljs-built_in">require</span> <span class="hljs-string">"async"</span></pre></div></div>
             
         </li>
         
@@ -86,10 +89,10 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h1>Scan all records in the collection(s) at <code>address</code></h1>
+              <h1 id="scan-all-records-in-the-collection-s-at-address-">Scan all records in the collection(s) at <code>address</code></h1>
 <p><code>address</code> specificies the collection(s) that should be scanned.</p>
 <p><code>options</code> defines two functions:</p>
 <ul>
@@ -101,50 +104,51 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>exports.<span class="function"><span class="title">scan</span></span> = (address, options={}) -&gt;
-  <span class="keyword">new</span> Scan <span class="keyword">this</span>, address, options
+            <div class="content"><div class='highlight'><pre>
+exports.scan = <span class="hljs-function"><span class="hljs-params">(address, options={})</span> -&gt;</span>
+  <span class="hljs-keyword">new</span> Scan <span class="hljs-keyword">this</span>, address, options
         
-<span class="class"><span class="keyword">class</span> <span class="title">Scan</span></span>
-  size: <span class="number">10</span>
-  total: <span class="number">0</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Scan</span></span>
+  size: <span class="hljs-number">10</span>
+  total: <span class="hljs-number">0</span>
   
-  constructor: (<span class="property">@storage</span>, <span class="property">@path</span>, options={}) -&gt;
-    extend <span class="keyword">this</span>, options
+  constructor: <span class="hljs-function"><span class="hljs-params">(@storage, @path, options={})</span> -&gt;</span>
+    extend <span class="hljs-keyword">this</span>, options
     waterfall [
-      (ƒ) =&gt; <span class="property">@getFirstScrollId</span> ƒ
-      (scrollId, ƒ) =&gt; <span class="property">@processDocs</span> scrollId, ƒ
-    ], <span class="property">@done</span>
+      (ƒ) =&gt; @getFirstScrollId ƒ
+      (scrollId, ƒ) =&gt; @processDocs scrollId, ƒ
+    ], @done
   
-  forEach: (doc) -&gt; 
-    console.log <span class="string">"<span class="subst">#{doc["_type"]}</span>/<span class="subst">#{doc["_id"]}</span>"</span>
+  forEach: <span class="hljs-function"><span class="hljs-params">(doc)</span> -&gt;</span> 
+    <span class="hljs-built_in">console</span>.log <span class="hljs-string">"<span class="hljs-subst">#{doc[<span class="hljs-string">"_type"</span>]}</span>/<span class="hljs-subst">#{doc[<span class="hljs-string">"_id"</span>]}</span>"</span>
 
-  done: (error, total) =&gt; 
-    console.error error <span class="keyword">if</span> error?
-    console.log <span class="string">"Finished scan of <span class="subst">#{total}</span> docs."</span>
+  done: <span class="hljs-function"><span class="hljs-params">(error, total)</span> =&gt;</span> 
+    <span class="hljs-built_in">console</span>.error error <span class="hljs-keyword">if</span> error?
+    <span class="hljs-built_in">console</span>.log <span class="hljs-string">"Finished scan of <span class="hljs-subst">#{total}</span> docs."</span>
 
-  getFirstScrollId: (callback) -&gt;
-    <span class="property">@storage</span>.request
-      method: <span class="string">"POST"</span>
-      path: <span class="string">"<span class="subst">#{@path}</span>/_search?search_type=scan&amp;scroll=10m&amp;size=<span class="subst">#{@size}</span>"</span>
-      done: (error, response) -&gt; callback(error, response[<span class="string">"_scroll_id"</span>])
+  getFirstScrollId: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    @storage.request
+      method: <span class="hljs-string">"POST"</span>
+      path: <span class="hljs-string">"<span class="hljs-subst">#{@path}</span>/_search?search_type=scan&amp;scroll=10m&amp;size=<span class="hljs-subst">#{@size}</span>"</span>
+      done: <span class="hljs-function"><span class="hljs-params">(error, response)</span> -&gt;</span> callback(error, response[<span class="hljs-string">"_scroll_id"</span>])
 
-  processDocs: (scrollId, callback) -&gt;
-    <span class="property">@storage</span>.request
-      method: <span class="string">"POST"</span>
-      path: <span class="string">"/_search/scroll?scroll=10m"</span>
+  processDocs: <span class="hljs-function"><span class="hljs-params">(scrollId, callback)</span> -&gt;</span>
+    @storage.request
+      method: <span class="hljs-string">"POST"</span>
+      path: <span class="hljs-string">"/_search/scroll?scroll=10m"</span>
       body: scrollId
-      done: (error, response) =&gt;
-        hits = response?[<span class="string">"hits"</span>][<span class="string">"hits"</span>]
-        scrollId = response?[<span class="string">"_scroll_id"</span>]
+      done: <span class="hljs-function"><span class="hljs-params">(error, response)</span> =&gt;</span>
+        hits = response?[<span class="hljs-string">"hits"</span>][<span class="hljs-string">"hits"</span>]
+        scrollId = response?[<span class="hljs-string">"_scroll_id"</span>]
 
-        <span class="keyword">if</span> hits.length &gt; <span class="number">0</span>
-          <span class="property">@total</span> = <span class="property">@total</span> + hits.length
-          <span class="property">@forEach</span> doc <span class="keyword">for</span> doc <span class="keyword">in</span> hits
+        <span class="hljs-keyword">if</span> hits.length &gt; <span class="hljs-number">0</span>
+          @total = @total + hits.length
+          @forEach doc <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> hits
         
-        <span class="keyword">if</span> scrollId? <span class="keyword">and</span> hits.length <span class="keyword">isnt</span> <span class="number">0</span>
-          <span class="property">@processDocs</span> scrollId, callback
-        <span class="keyword">else</span>
-          callback(error, <span class="property">@total</span>)</pre></div></div>
+        <span class="hljs-keyword">if</span> scrollId? <span class="hljs-keyword">and</span> hits.length <span class="hljs-keyword">isnt</span> <span class="hljs-number">0</span>
+          @processDocs scrollId, callback
+        <span class="hljs-keyword">else</span>
+          callback(error, @total)</pre></div></div>
             
         </li>
         

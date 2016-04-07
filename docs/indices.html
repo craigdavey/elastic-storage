@@ -16,43 +16,45 @@
           <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
           <a class="small" href="javascript:void(0);">+</a>
           <div id="jump_wrapper">
-          <div id="jump_page">
-            
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
               
-              <a class="source" href="aliases.html">
-                aliases.coffee
-              </a>
-            
+                
+                <a class="source" href="aliases.html">
+                  aliases.coffee
+                </a>
               
-              <a class="source" href="backbone_sync.html">
-                backbone_sync.coffee
-              </a>
-            
+                
+                <a class="source" href="backbone_sync.html">
+                  backbone_sync.coffee
+                </a>
               
-              <a class="source" href="core.html">
-                core.coffee
-              </a>
-            
+                
+                <a class="source" href="core.html">
+                  core.coffee
+                </a>
               
-              <a class="source" href="crud.html">
-                crud.coffee
-              </a>
-            
+                
+                <a class="source" href="crud.html">
+                  crud.coffee
+                </a>
               
-              <a class="source" href="index.html">
-                index.coffee
-              </a>
-            
+                
+                <a class="source" href="index.html">
+                  index.coffee
+                </a>
               
-              <a class="source" href="indices.html">
-                indices.coffee
-              </a>
-            
+                
+                <a class="source" href="indices.html">
+                  indices.coffee
+                </a>
               
-              <a class="source" href="scan.html">
-                scan.coffee
-              </a>
-            
+                
+                <a class="source" href="scan.html">
+                  scan.coffee
+                </a>
+              
+            </div>
           </div>
         </li>
       </ul>
@@ -77,7 +79,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports =</pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-built_in">module</span>.exports =</pre></div></div>
             
         </li>
         
@@ -85,10 +88,10 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h1>Initialize a blank index at this <code>address</code></h1>
+              <h1 id="initialize-a-blank-index-at-this-address-">Initialize a blank index at this <code>address</code></h1>
 <p><code>address</code> defines the location of the index. Use a string that will work 
 well in HTTP URLs. <code>address</code> may not contain <code>/</code> or <code>,</code> characters and 
 should not begin with <code>_</code>.</p>
@@ -98,11 +101,12 @@ created successfuly if <code>error</code> is <code>undefined</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  init: (address, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"PUT"</span>,
+            <div class="content"><div class='highlight'><pre>
+  init: <span class="hljs-function"><span class="hljs-params">(address, callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"PUT"</span>,
       path: address
-      done: (error, output, response, request) -&gt;
-        callback error, <span class="literal">undefined</span>, response, request</pre></div></div>
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+        callback error, <span class="hljs-literal">undefined</span>, response, request</pre></div></div>
             
         </li>
         
@@ -110,10 +114,10 @@ created successfuly if <code>error</code> is <code>undefined</code>.</p>
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h1>Drop the index at this <code>address</code></h1>
+              <h1 id="drop-the-index-at-this-address-">Drop the index at this <code>address</code></h1>
 <p>Dropping an index permanently erases its mapping and all of its records.
 <code>address</code> specifies the index or indices that should be destroyed.
 Use <code>&quot;_all&quot;</code> to drop everything – but be careful – there is no undo.</p>
@@ -125,17 +129,18 @@ successfuly destroyed if <code>error</code> is <code>undefined</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  drop: (address, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="keyword">if</span> address.trim() <span class="keyword">is</span> <span class="string">""</span>
-      callback <span class="keyword">new</span> Error <span class="string">"""
+            <div class="content"><div class='highlight'><pre>
+  drop: <span class="hljs-function"><span class="hljs-params">(address, callback=@defaultCallback)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> address.trim() <span class="hljs-keyword">is</span> <span class="hljs-string">""</span>
+      callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"""
         ElasticStorage::drop received a blank address. Use the "_all" 
         index if you really want to erase all of your indices.
         """</span>
-    <span class="keyword">else</span>
-      <span class="property">@request</span> <span class="string">"DELETE"</span>,
+    <span class="hljs-keyword">else</span>
+      @request <span class="hljs-string">"DELETE"</span>,
         path: address
-        done: (error, output, response, request) -&gt;
-          callback error, <span class="literal">undefined</span>, response, request</pre></div></div>
+        done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+          callback error, <span class="hljs-literal">undefined</span>, response, request</pre></div></div>
             
         </li>
         
@@ -143,10 +148,10 @@ successfuly destroyed if <code>error</code> is <code>undefined</code>.</p>
         <li id="section-4">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <h1>Refresh the index at this <code>address</code></h1>
+              <h1 id="refresh-the-index-at-this-address-">Refresh the index at this <code>address</code></h1>
 <p>The cluster refreshes your indices automatically but ocasionaly you’ll
 need to do it yourself (in unit tests for example).</p>
 <p><code>address</code> specifies the index or indices that should be refreshed.</p>
@@ -156,11 +161,12 @@ need to do it yourself (in unit tests for example).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  refresh: (address, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"POST"</span>,
-      path: <span class="string">"<span class="subst">#{address}</span>/_refresh"</span>
-      done: (error, output, response, request) -&gt;
-        callback error, <span class="literal">undefined</span>, response, request</pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+  refresh: <span class="hljs-function"><span class="hljs-params">(address, callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"POST"</span>,
+      path: <span class="hljs-string">"<span class="hljs-subst">#{address}</span>/_refresh"</span>
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+        callback error, <span class="hljs-literal">undefined</span>, response, request</pre></div></div>
             
         </li>
         
@@ -168,25 +174,26 @@ need to do it yourself (in unit tests for example).</p>
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <h1>Is there an index at this <code>address</code>?</h1>
+              <h1 id="is-there-an-index-at-this-address-">Is there an index at this <code>address</code>?</h1>
 <p>Dispatches an <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists.html">index exists request</a>.</p>
 <p>Expect <code>callback(error, exists, ...)</code> when the answer is known. <code>exists</code> is
 <code>true</code> when the index was found and is <code>false</code> when it was not found.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  has: (address, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"HEAD"</span>,
+            <div class="content"><div class='highlight'><pre>
+  has: <span class="hljs-function"><span class="hljs-params">(address, callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"HEAD"</span>,
       path: address
-      done: (error, output, response, request) -&gt;
-        <span class="keyword">if</span> error?.code <span class="keyword">is</span> <span class="number">404</span>
-          exists = <span class="literal">no</span>
-          error  = <span class="literal">undefined</span>
-        <span class="keyword">else</span>
-          exists = response?.statusCode <span class="keyword">is</span> <span class="number">200</span>
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+        <span class="hljs-keyword">if</span> error?.code <span class="hljs-keyword">is</span> <span class="hljs-number">404</span>
+          exists = <span class="hljs-literal">no</span>
+          error  = <span class="hljs-literal">undefined</span>
+        <span class="hljs-keyword">else</span>
+          exists = response?.statusCode <span class="hljs-keyword">is</span> <span class="hljs-number">200</span>
         callback error, exists, response, request</pre></div></div>
             
         </li>
@@ -195,10 +202,10 @@ need to do it yourself (in unit tests for example).</p>
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <h1>Fetch a list of indices (with their aliases)</h1>
+              <h1 id="fetch-a-list-of-indices-with-their-aliases-">Fetch a list of indices (with their aliases)</h1>
 <p>Dispatches an <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html">index aliases request</a> 
 and converts the response into a list of <code>indices</code>. Each object in the list
 contains <code>id</code> and <code>alias</code> members. <code>id</code> is the address of the index. <code>alias</code>
@@ -212,13 +219,14 @@ Feel free to replace this method if you require support for more complexity.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  fetchIndices: (callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"GET"</span>,
-      path: <span class="string">"_aliases"</span>
-      done: (error, output, response, request) -&gt;
-        indices = <span class="keyword">if</span> output
-          {id, alias: Object.keys(value.aliases)[<span class="number">0</span>]} <span class="keyword">for</span> id, value <span class="keyword">of</span> output
-        <span class="keyword">if</span> indices <span class="keyword">then</span> indices.sort (a, b) -&gt; a.id &gt; b.id
+            <div class="content"><div class='highlight'><pre>
+  fetchIndices: <span class="hljs-function"><span class="hljs-params">(callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"GET"</span>,
+      path: <span class="hljs-string">"_aliases"</span>
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+        indices = <span class="hljs-keyword">if</span> output
+          {id, alias: Object.keys(value.aliases)[<span class="hljs-number">0</span>]} <span class="hljs-keyword">for</span> id, value <span class="hljs-keyword">of</span> output
+        <span class="hljs-keyword">if</span> indices <span class="hljs-keyword">then</span> indices.sort (a, b) -&gt; a.id &gt; b.id
         callback error, indices, response, request</pre></div></div>
             
         </li>

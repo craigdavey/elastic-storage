@@ -16,43 +16,45 @@
           <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
           <a class="small" href="javascript:void(0);">+</a>
           <div id="jump_wrapper">
-          <div id="jump_page">
-            
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
               
-              <a class="source" href="aliases.html">
-                aliases.coffee
-              </a>
-            
+                
+                <a class="source" href="aliases.html">
+                  aliases.coffee
+                </a>
               
-              <a class="source" href="backbone_sync.html">
-                backbone_sync.coffee
-              </a>
-            
+                
+                <a class="source" href="backbone_sync.html">
+                  backbone_sync.coffee
+                </a>
               
-              <a class="source" href="core.html">
-                core.coffee
-              </a>
-            
+                
+                <a class="source" href="core.html">
+                  core.coffee
+                </a>
               
-              <a class="source" href="crud.html">
-                crud.coffee
-              </a>
-            
+                
+                <a class="source" href="crud.html">
+                  crud.coffee
+                </a>
               
-              <a class="source" href="index.html">
-                index.coffee
-              </a>
-            
+                
+                <a class="source" href="index.html">
+                  index.coffee
+                </a>
               
-              <a class="source" href="indices.html">
-                indices.coffee
-              </a>
-            
+                
+                <a class="source" href="indices.html">
+                  indices.coffee
+                </a>
               
-              <a class="source" href="scan.html">
-                scan.coffee
-              </a>
-            
+                
+                <a class="source" href="scan.html">
+                  scan.coffee
+                </a>
+              
+            </div>
           </div>
         </li>
       </ul>
@@ -77,9 +79,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>{extend} = require <span class="string">"underscore"</span>
+            <div class="content"><div class='highlight'><pre>{extend} = <span class="hljs-built_in">require</span> <span class="hljs-string">"underscore"</span>
 
-module.exports =</pre></div></div>
+<span class="hljs-built_in">module</span>.exports =</pre></div></div>
             
         </li>
         
@@ -87,10 +89,10 @@ module.exports =</pre></div></div>
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h1>Index a record at this <code>address</code> with these <code>attributes</code></h1>
+              <h1 id="index-a-record-at-this-address-with-these-attributes-">Index a record at this <code>address</code> with these <code>attributes</code></h1>
 <p><code>address</code> should be a string in the form <code>&quot;index/collection/id&quot;</code>.</p>
 <p>Dispatches a <a href="http://www.elasticsearch.org/guide/reference/api/index_.html">document indexing request</a> 
 that <code>PUT</code>s <code>attributes</code> in the location defined by <code>address</code>.
@@ -100,12 +102,13 @@ If a record already exists at the <code>address</code> it will be replaced.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  index: (address, attributes, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"PUT"</span>,
+            <div class="content"><div class='highlight'><pre>
+  index: <span class="hljs-function"><span class="hljs-params">(address, attributes, callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"PUT"</span>,
       path: address
       body: attributes
-      done: (error, output, response, request) -&gt; 
-        callback error, <span class="literal">undefined</span>, response, request</pre></div></div>
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span> 
+        callback error, <span class="hljs-literal">undefined</span>, response, request</pre></div></div>
             
         </li>
         
@@ -113,10 +116,10 @@ If a record already exists at the <code>address</code> it will be replaced.</p>
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h1>Search <code>address</code> for records that match <code>criteria</code></h1>
+              <h1 id="search-address-for-records-that-match-criteria-">Search <code>address</code> for records that match <code>criteria</code></h1>
 <p><code>address</code> specifies the collections that should be searched.
 For example: an <code>address</code> of <code>&quot;business/memos&quot;</code> searches records in the <code>&quot;memos&quot;</code> collection of the <code>&quot;business&quot;</code> index.
 Addresses that expand to multiple indices and/or collections are acceptable too. 
@@ -131,13 +134,14 @@ Each hit in the list contains <code>score</code>, <code>collection</code>, <code
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  search: (address, criteria, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"POST"</span>,
-      path: <span class="string">"<span class="subst">#{address}</span>/_search"</span>
+            <div class="content"><div class='highlight'><pre>
+  search: <span class="hljs-function"><span class="hljs-params">(address, criteria, callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"POST"</span>,
+      path: <span class="hljs-string">"<span class="hljs-subst">#{address}</span>/_search"</span>
       body: criteria
-      done: (error, output, response, request) -&gt;
-        <span class="keyword">if</span> output
-          hits = <span class="keyword">for</span> {_id, _score, _source, _type, highlight} <span class="keyword">in</span> output.hits.hits
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+        <span class="hljs-keyword">if</span> output
+          hits = <span class="hljs-keyword">for</span> {_id, _score, _source, _type, highlight} <span class="hljs-keyword">in</span> output.hits.hits
             score: _score
             collection: _type
             record: extend(_source, {id: _id})

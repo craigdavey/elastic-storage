@@ -16,43 +16,45 @@
           <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
           <a class="small" href="javascript:void(0);">+</a>
           <div id="jump_wrapper">
-          <div id="jump_page">
-            
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
               
-              <a class="source" href="aliases.html">
-                aliases.coffee
-              </a>
-            
+                
+                <a class="source" href="aliases.html">
+                  aliases.coffee
+                </a>
               
-              <a class="source" href="backbone_sync.html">
-                backbone_sync.coffee
-              </a>
-            
+                
+                <a class="source" href="backbone_sync.html">
+                  backbone_sync.coffee
+                </a>
               
-              <a class="source" href="core.html">
-                core.coffee
-              </a>
-            
+                
+                <a class="source" href="core.html">
+                  core.coffee
+                </a>
               
-              <a class="source" href="crud.html">
-                crud.coffee
-              </a>
-            
+                
+                <a class="source" href="crud.html">
+                  crud.coffee
+                </a>
               
-              <a class="source" href="index.html">
-                index.coffee
-              </a>
-            
+                
+                <a class="source" href="index.html">
+                  index.coffee
+                </a>
               
-              <a class="source" href="indices.html">
-                indices.coffee
-              </a>
-            
+                
+                <a class="source" href="indices.html">
+                  indices.coffee
+                </a>
               
-              <a class="source" href="scan.html">
-                scan.coffee
-              </a>
-            
+                
+                <a class="source" href="scan.html">
+                  scan.coffee
+                </a>
+              
+            </div>
           </div>
         </li>
       </ul>
@@ -76,48 +78,48 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports =
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports =
 
-  migrate: (alias, currentIndex, newIndex, callback=<span class="property">@defaultCallback</span>) -&gt;
+  migrate: <span class="hljs-function"><span class="hljs-params">(alias, currentIndex, newIndex, callback=@defaultCallback)</span> -&gt;</span>
     alias = alias.toString()
-    <span class="property">@modifyAliases</span> [
+    @modifyAliases [
       remove: {alias, index: currentIndex}
       add:    {alias, index: newIndex}
     ], callback
 
 
-  createAlias: (alias, index, callback=<span class="property">@defaultCallback</span>) -&gt;
+  createAlias: <span class="hljs-function"><span class="hljs-params">(alias, index, callback=@defaultCallback)</span> -&gt;</span>
     alias = alias.toString()
-    <span class="property">@modifyAliases</span> [add: {alias, index}], callback
+    @modifyAliases [add: {alias, index}], callback
 
 
-  deleteAlias: (alias, index, callback=<span class="property">@defaultCallback</span>) -&gt;
+  deleteAlias: <span class="hljs-function"><span class="hljs-params">(alias, index, callback=@defaultCallback)</span> -&gt;</span>
     alias = alias.toString()
-    <span class="property">@modifyAliases</span> [remove: {alias, index}], callback
+    @modifyAliases [remove: {alias, index}], callback
 
 
-  getAliases: (callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"GET"</span>,
-      path: <span class="string">"_aliases"</span>
-      done: (error, response, statusCode) -&gt;
+  getAliases: <span class="hljs-function"><span class="hljs-params">(callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"GET"</span>,
+      path: <span class="hljs-string">"_aliases"</span>
+      done: <span class="hljs-function"><span class="hljs-params">(error, response, statusCode)</span> -&gt;</span>
         aliases = []
         map = {}
-        <span class="keyword">if</span> response?
-          <span class="keyword">for</span> index <span class="keyword">of</span> response
-            <span class="keyword">for</span> alias <span class="keyword">in</span> Object.keys response[index].aliases
-              <span class="keyword">if</span> map[alias] <span class="keyword">is</span> <span class="literal">undefined</span>
+        <span class="hljs-keyword">if</span> response?
+          <span class="hljs-keyword">for</span> index <span class="hljs-keyword">of</span> response
+            <span class="hljs-keyword">for</span> alias <span class="hljs-keyword">in</span> Object.keys response[index].aliases
+              <span class="hljs-keyword">if</span> map[alias] <span class="hljs-keyword">is</span> <span class="hljs-literal">undefined</span>
                 aliases.push alias
                 map[alias] = []
               map[alias].push index
         callback error, aliases, map
 
 
-  modifyAliases: (actions, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="property">@request</span> <span class="string">"POST"</span>,
-      path: <span class="string">"_aliases"</span>
+  modifyAliases: <span class="hljs-function"><span class="hljs-params">(actions, callback=@defaultCallback)</span> -&gt;</span>
+    @request <span class="hljs-string">"POST"</span>,
+      path: <span class="hljs-string">"_aliases"</span>
       body: {actions}
-      done: (error, response) -&gt;
-        callback error, response?[<span class="string">"acknowledged"</span>]?</pre></div></div>
+      done: <span class="hljs-function"><span class="hljs-params">(error, response)</span> -&gt;</span>
+        callback error, response?[<span class="hljs-string">"acknowledged"</span>]?</pre></div></div>
             
         </li>
         

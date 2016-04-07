@@ -16,43 +16,45 @@
           <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
           <a class="small" href="javascript:void(0);">+</a>
           <div id="jump_wrapper">
-          <div id="jump_page">
-            
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
               
-              <a class="source" href="aliases.html">
-                aliases.coffee
-              </a>
-            
+                
+                <a class="source" href="aliases.html">
+                  aliases.coffee
+                </a>
               
-              <a class="source" href="backbone_sync.html">
-                backbone_sync.coffee
-              </a>
-            
+                
+                <a class="source" href="backbone_sync.html">
+                  backbone_sync.coffee
+                </a>
               
-              <a class="source" href="core.html">
-                core.coffee
-              </a>
-            
+                
+                <a class="source" href="core.html">
+                  core.coffee
+                </a>
               
-              <a class="source" href="crud.html">
-                crud.coffee
-              </a>
-            
+                
+                <a class="source" href="crud.html">
+                  crud.coffee
+                </a>
               
-              <a class="source" href="index.html">
-                index.coffee
-              </a>
-            
+                
+                <a class="source" href="index.html">
+                  index.coffee
+                </a>
               
-              <a class="source" href="indices.html">
-                indices.coffee
-              </a>
-            
+                
+                <a class="source" href="indices.html">
+                  indices.coffee
+                </a>
               
-              <a class="source" href="scan.html">
-                scan.coffee
-              </a>
-            
+                
+                <a class="source" href="scan.html">
+                  scan.coffee
+                </a>
+              
+            </div>
           </div>
         </li>
       </ul>
@@ -76,61 +78,61 @@
               <p>Generates a <code>Backbone.sync</code> method bound to a instance of [ElasticStorage].
 Accepts the same <code>options</code> as <code>ElasticStorage</code>:</p>
 <pre><code>Backbone.sync = ElasticStorage.setupBackboneSync
-  host: &quot;storage.example.com&quot;
-  port: 9200</code></pre>
-<p>If your model (or collection) defines a <code>storageAddress</code> it will be used
+  host: <span class="hljs-string">"storage.example.com"</span>
+  port: <span class="hljs-number">9200</span>
+</code></pre><p>If your model (or collection) defines a <code>storageAddress</code> it will be used
 as the <code>address</code> argument for storage methods. If there is no <code>storageAddress</code>
 the object’s <code>url</code> will be used instead. You should probably define both
 methods if your models are used in multiple environments. Use <code>model.url()</code>
 on the client side and <code>model.storageAddress()</code> on the server:</p>
-<pre><code>class Memo extends Backbone.Model
-  storageAddress: -&gt;
-    &quot;app/#{@url()}&quot;
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Memo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Backbone</span>.<span class="hljs-title">Model</span></span>
+  storageAddress: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-string">"app/<span class="hljs-subst">#{@url()}</span>"</span>
 
-  url: -&gt;
-    if @isNew()
-      &quot;memos&quot;
-    else
-      &quot;memos/#{@id}&quot;</code></pre>
-<p>Define <code>criteria</code> on any collections that should be reduced or sorted. 
+  url: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">if</span> @isNew()
+      <span class="hljs-string">"memos"</span>
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-string">"memos/<span class="hljs-subst">#{@id}</span>"</span>
+</code></pre><p>Define <code>criteria</code> on any collections that should be reduced or sorted. 
 Specify your <code>criteria</code> with the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/">query DSL</a>.</p>
-<pre><code>class ArchivedMemos extends Backbone.Collection
-  storageAddress: -&gt;
-    &quot;app/memos&quot;
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArchivedMemos</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Backbone</span>.<span class="hljs-title">Collection</span></span>
+  storageAddress: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-string">"app/memos"</span>
 
-  criteria: -&gt;
-    filter: {exists: {field: &quot;archived_at&quot;}}
-    sort: {&quot;updated_at&quot;: {order:&quot;desc&quot;}}
-    size: 100</code></pre>
-
+  criteria: <span class="hljs-function">-&gt;</span>
+    filter: {exists: {field: <span class="hljs-string">"archived_at"</span>}}
+    sort: {<span class="hljs-string">"updated_at"</span>: {order:<span class="hljs-string">"desc"</span>}}
+    size: <span class="hljs-number">100</span>
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports.<span class="function"><span class="title">setupBackboneSync</span></span> = (options={}) -&gt;
-  <span class="keyword">if</span> options <span class="keyword">instanceof</span> <span class="keyword">this</span>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports.setupBackboneSync = <span class="hljs-function"><span class="hljs-params">(options={})</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> options <span class="hljs-keyword">instanceof</span> <span class="hljs-keyword">this</span>
     storage = options
-  <span class="keyword">else</span>
-    storage = <span class="keyword">new</span> <span class="keyword">this</span> options
+  <span class="hljs-keyword">else</span>
+    storage = <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span> options
   
-  <span class="keyword">return</span> (method, object, options={}) -&gt;
-    address = getValue(object, <span class="string">"storageAddress"</span>) <span class="keyword">or</span> getValue(object, <span class="string">"url"</span>)
+  <span class="hljs-keyword">return</span> (method, object, options={}) -&gt;
+    address = getValue(object, <span class="hljs-string">"storageAddress"</span>) <span class="hljs-keyword">or</span> getValue(object, <span class="hljs-string">"url"</span>)
     
-    input = <span class="keyword">switch</span> method
-      <span class="keyword">when</span> <span class="string">"read"</span>
-        getValue(object, <span class="string">"criteria"</span>)
-      <span class="keyword">when</span> <span class="string">"create"</span>, <span class="string">"update"</span>
+    input = <span class="hljs-keyword">switch</span> method
+      <span class="hljs-keyword">when</span> <span class="hljs-string">"read"</span>
+        getValue(object, <span class="hljs-string">"criteria"</span>)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">"create"</span>, <span class="hljs-string">"update"</span>
         object.toJSON()
     
-    storage[method] address, input, (error, output, response, request) -&gt;
-      <span class="keyword">if</span> error <span class="keyword">is</span> <span class="literal">undefined</span>
-        <span class="keyword">if</span> options.success <span class="keyword">then</span> options.success(object, output, options)
-        object.trigger(<span class="string">"sync"</span>, object, output, options)
-      <span class="keyword">else</span>
-        <span class="keyword">if</span> options.error <span class="keyword">then</span> options.error(object, request, options)
-        object.trigger(<span class="string">"error"</span>, object, request, options)
+    storage[method] address, input, <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+      <span class="hljs-keyword">if</span> error <span class="hljs-keyword">is</span> <span class="hljs-literal">undefined</span>
+        <span class="hljs-keyword">if</span> options.success <span class="hljs-keyword">then</span> options.success(object, output, options)
+        object.trigger(<span class="hljs-string">"sync"</span>, object, output, options)
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">if</span> options.error <span class="hljs-keyword">then</span> options.error(object, request, options)
+        object.trigger(<span class="hljs-string">"error"</span>, object, request, options)
+<span class="hljs-function">
 
-
-<span class="function"><span class="title">getValue</span></span> = (object, member) -&gt;
-  <span class="keyword">if</span> object[member]?.call <span class="keyword">then</span> object[member]() <span class="keyword">else</span> object[member]</pre></div></div>
+<span class="hljs-title">getValue</span> = <span class="hljs-params">(object, member)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> object[member]?.call <span class="hljs-keyword">then</span> object[member]() <span class="hljs-keyword">else</span> object[member]</pre></div></div>
             
         </li>
         

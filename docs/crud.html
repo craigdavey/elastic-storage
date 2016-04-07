@@ -16,43 +16,45 @@
           <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
           <a class="small" href="javascript:void(0);">+</a>
           <div id="jump_wrapper">
-          <div id="jump_page">
-            
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
               
-              <a class="source" href="aliases.html">
-                aliases.coffee
-              </a>
-            
+                
+                <a class="source" href="aliases.html">
+                  aliases.coffee
+                </a>
               
-              <a class="source" href="backbone_sync.html">
-                backbone_sync.coffee
-              </a>
-            
+                
+                <a class="source" href="backbone_sync.html">
+                  backbone_sync.coffee
+                </a>
               
-              <a class="source" href="core.html">
-                core.coffee
-              </a>
-            
+                
+                <a class="source" href="core.html">
+                  core.coffee
+                </a>
               
-              <a class="source" href="crud.html">
-                crud.coffee
-              </a>
-            
+                
+                <a class="source" href="crud.html">
+                  crud.coffee
+                </a>
               
-              <a class="source" href="index.html">
-                index.coffee
-              </a>
-            
+                
+                <a class="source" href="index.html">
+                  index.coffee
+                </a>
               
-              <a class="source" href="indices.html">
-                indices.coffee
-              </a>
-            
+                
+                <a class="source" href="indices.html">
+                  indices.coffee
+                </a>
               
-              <a class="source" href="scan.html">
-                scan.coffee
-              </a>
-            
+                
+                <a class="source" href="scan.html">
+                  scan.coffee
+                </a>
+              
+            </div>
           </div>
         </li>
       </ul>
@@ -78,9 +80,10 @@ operations normally found in old-school databases.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>{extend} = require <span class="string">"underscore"</span>
+            <div class="content"><div class='highlight'><pre>
+{extend} = <span class="hljs-built_in">require</span> <span class="hljs-string">"underscore"</span>
 
-module.exports =</pre></div></div>
+<span class="hljs-built_in">module</span>.exports =</pre></div></div>
             
         </li>
         
@@ -88,10 +91,10 @@ module.exports =</pre></div></div>
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h1>Create a record of these <code>attributes</code> in the collection at <code>address</code></h1>
+              <h1 id="create-a-record-of-these-attributes-in-the-collection-at-address-">Create a record of these <code>attributes</code> in the collection at <code>address</code></h1>
 <p><code>address</code> should be a string in the form <code>&quot;index/collection&quot;</code>.</p>
 <p><code>attributes</code> define the record. <code>&quot;created_at&quot;</code> and <code>&quot;updated_at&quot;</code> attributes
 are set to the current time automatically.</p>
@@ -104,19 +107,20 @@ Then reads the record and passes it to your <code>callback</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  create: (address, attributes, callback=<span class="property">@defaultCallback</span>) -&gt;
-    attributes[<span class="string">"created_at"</span>] = <span class="string">"now"</span>
-    attributes[<span class="string">"updated_at"</span>] = <span class="string">"now"</span>
-    <span class="property">@setTime</span> attributes
+            <div class="content"><div class='highlight'><pre>
+  create: <span class="hljs-function"><span class="hljs-params">(address, attributes, callback=@defaultCallback)</span> -&gt;</span>
+    attributes[<span class="hljs-string">"created_at"</span>] = <span class="hljs-string">"now"</span>
+    attributes[<span class="hljs-string">"updated_at"</span>] = <span class="hljs-string">"now"</span>
+    @setTime attributes
     
-    <span class="property">@request</span> <span class="string">"POST"</span>,
+    @request <span class="hljs-string">"POST"</span>,
       path: address
       body: attributes
-      done: (error, output, response, request) =&gt;
-        <span class="keyword">if</span> output
-          <span class="property">@read</span> <span class="string">"<span class="subst">#{address}</span>/<span class="subst">#{output._id}</span>"</span>, callback
-        <span class="keyword">else</span>
-          callback error, <span class="literal">undefined</span>, response, request</pre></div></div>
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> =&gt;</span>
+        <span class="hljs-keyword">if</span> output
+          @read <span class="hljs-string">"<span class="hljs-subst">#{address}</span>/<span class="hljs-subst">#{output._id}</span>"</span>, callback
+        <span class="hljs-keyword">else</span>
+          callback error, <span class="hljs-literal">undefined</span>, response, request</pre></div></div>
             
         </li>
         
@@ -124,10 +128,10 @@ Then reads the record and passes it to your <code>callback</code>.</p>
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h1>Read one record, or many records, from an <code>address</code></h1>
+              <h1 id="read-one-record-or-many-records-from-an-address-">Read one record, or many records, from an <code>address</code></h1>
 <p>Pass an <code>address</code> in the form <code>&quot;index/collection/id&quot;</code> to read one record.
 Dispatches a <a href="http://www.elasticsearch.org/guide/reference/api/get.html">document retrieval request</a> 
 and constructs a <code>record</code> from the <code>_id</code> and <code>_source</code> members of the response.
@@ -144,25 +148,26 @@ If you’re not using <code>criteria</code> you can put <code>callback</code> in
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  read: (address, criteria, callback=<span class="property">@defaultCallback</span>) -&gt;
-    <span class="keyword">if</span> criteria <span class="keyword">instanceof</span> Function
+            <div class="content"><div class='highlight'><pre>
+  read: <span class="hljs-function"><span class="hljs-params">(address, criteria, callback=@defaultCallback)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> criteria <span class="hljs-keyword">instanceof</span> Function
       callback = criteria
-      criteria = <span class="literal">undefined</span>
+      criteria = <span class="hljs-literal">undefined</span>
 
-    <span class="keyword">if</span> address.match <span class="property">@RECORD_ADDRESS_PATTERN</span>
-      <span class="property">@request</span> <span class="string">"GET"</span>,
+    <span class="hljs-keyword">if</span> address.match @RECORD_ADDRESS_PATTERN
+      @request <span class="hljs-string">"GET"</span>,
         path: address
-        done: (error, output, response, request) -&gt;
-          record = <span class="keyword">if</span> output
+        done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+          record = <span class="hljs-keyword">if</span> output
             extend {id: output._id}, output._source
           callback error, record, response, request
-    <span class="keyword">else</span>
-      <span class="property">@request</span> <span class="string">"POST"</span>,
-        path: <span class="string">"<span class="subst">#{address}</span>/_search"</span>
+    <span class="hljs-keyword">else</span>
+      @request <span class="hljs-string">"POST"</span>,
+        path: <span class="hljs-string">"<span class="hljs-subst">#{address}</span>/_search"</span>
         body: criteria
-        done: (error, output, response, request) -&gt;
-          records = <span class="keyword">if</span> output
-            extend {id: _id}, _source <span class="keyword">for</span> {_id, _source} <span class="keyword">in</span> output.hits.hits
+        done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+          records = <span class="hljs-keyword">if</span> output
+            extend {id: _id}, _source <span class="hljs-keyword">for</span> {_id, _source} <span class="hljs-keyword">in</span> output.hits.hits
           callback error, records, response, request</pre></div></div>
             
         </li>
@@ -171,10 +176,10 @@ If you’re not using <code>criteria</code> you can put <code>callback</code> in
         <li id="section-4">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <h1>Update the record at <code>address</code> with these <code>attributes</code></h1>
+              <h1 id="update-the-record-at-address-with-these-attributes-">Update the record at <code>address</code> with these <code>attributes</code></h1>
 <p><code>address</code> should be a string in the form <code>&quot;index/collection/id&quot;</code>.</p>
 <p><code>attributes</code> define the record. The <code>&quot;updated_at&quot;</code> attribute is set to the
 current time automatically.</p>
@@ -186,18 +191,19 @@ your <code>callback</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  update: (address, attributes, callback=<span class="property">@defaultCallback</span>) -&gt;
-    attributes[<span class="string">"updated_at"</span>] = <span class="string">"now"</span>
-    <span class="property">@setTime</span> attributes
+            <div class="content"><div class='highlight'><pre>
+  update: <span class="hljs-function"><span class="hljs-params">(address, attributes, callback=@defaultCallback)</span> -&gt;</span>
+    attributes[<span class="hljs-string">"updated_at"</span>] = <span class="hljs-string">"now"</span>
+    @setTime attributes
     
-    <span class="property">@request</span> <span class="string">"PUT"</span>,
+    @request <span class="hljs-string">"PUT"</span>,
       path: address
       body: attributes
-      done: (error, output, response, request) =&gt;
-        <span class="keyword">if</span> error <span class="keyword">is</span> <span class="literal">undefined</span>
-          <span class="property">@read</span> address, callback
-        <span class="keyword">else</span>
-          callback error, <span class="literal">undefined</span>, response, request</pre></div></div>
+      done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> =&gt;</span>
+        <span class="hljs-keyword">if</span> error <span class="hljs-keyword">is</span> <span class="hljs-literal">undefined</span>
+          @read address, callback
+        <span class="hljs-keyword">else</span>
+          callback error, <span class="hljs-literal">undefined</span>, response, request</pre></div></div>
             
         </li>
         
@@ -205,10 +211,10 @@ your <code>callback</code>.</p>
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <h1>Delete the record located at this <code>address</code></h1>
+              <h1 id="delete-the-record-located-at-this-address-">Delete the record located at this <code>address</code></h1>
 <p><code>address</code> should be a string in the form <code>&quot;index/collection/id&quot;</code>.</p>
 <p><code>callback</code> may be passed as the second or third argument.
 Support for passing it as the third argument is in place to maintain symmetry with the other CRUD methods.</p>
@@ -219,19 +225,20 @@ If <code>error</code> is <code>undefined</code> the operation was successful.</p
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">delete</span>: (address, callback=<span class="property">@defaultCallback</span>) -&gt;
-    callback = arguments[<span class="number">2</span>] <span class="keyword">or</span> callback
+            <div class="content"><div class='highlight'><pre>
+  delete: <span class="hljs-function"><span class="hljs-params">(address, callback=@defaultCallback)</span> -&gt;</span>
+    callback = arguments[<span class="hljs-number">2</span>] <span class="hljs-keyword">or</span> callback
     
-    <span class="keyword">if</span> address.trim() <span class="keyword">is</span> <span class="string">""</span>
-      callback <span class="keyword">new</span> Error <span class="string">"""
+    <span class="hljs-keyword">if</span> address.trim() <span class="hljs-keyword">is</span> <span class="hljs-string">""</span>
+      callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"""
         ElasticStorage::delete received a blank address. Refused to send a 
         DELETE request because it could erase all your indices.
         """</span>
-    <span class="keyword">else</span>
-      <span class="property">@request</span> <span class="string">"DELETE"</span>,
+    <span class="hljs-keyword">else</span>
+      @request <span class="hljs-string">"DELETE"</span>,
         path: address
-        done: (error, output, response, request) -&gt;
-          callback error, <span class="literal">undefined</span>, response, request</pre></div></div>
+        done: <span class="hljs-function"><span class="hljs-params">(error, output, response, request)</span> -&gt;</span>
+          callback error, <span class="hljs-literal">undefined</span>, response, request</pre></div></div>
             
         </li>
         
@@ -255,20 +262,8 @@ If <code>error</code> is <code>undefined</code> the operation was successful.</p
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Matches <code>&quot;index/collection/id&quot;</code> formated <code>address</code> arguments that refer to one record. 
-Used by the <code>read</code> method to decide when to read one record vs. many records.</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>  RECORD_ADDRESS_PATTERN: <span class="regexp">///
-    ^
-    [a-zA-Z0-9_-]+ <span class="comment"># index</span>
-    /
-    [a-zA-Z0-9_-]+ <span class="comment"># collection</span>
-    /
-    [a-zA-Z0-9_-]+ <span class="comment"># id</span>
-    $
-  ///</span></pre></div></div>
             
         </li>
         
@@ -279,13 +274,18 @@ Used by the <code>read</code> method to decide when to read one record vs. many 
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>Attribute names that match this pattern are time attributes.</p>
+              <p>Matches <code>&quot;index/collection/id&quot;</code> formated <code>address</code> arguments that refer to one record. 
+Used by the <code>read</code> method to decide when to read one record vs. many records.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  TIME_ATTRIBUTE_PATTERN: <span class="regexp">///
+            <div class="content"><div class='highlight'><pre>  RECORD_ADDRESS_PATTERN: <span class="hljs-regexp">///
     ^
-    [a-z_]+_at
+    [a-zA-Z0-9_-]+ <span class="hljs-comment"># index</span>
+    /
+    [a-zA-Z0-9_-]+ <span class="hljs-comment"># collection</span>
+    /
+    [a-zA-Z0-9_-]+ <span class="hljs-comment"># id</span>
     $
   ///</span></pre></div></div>
             
@@ -298,15 +298,34 @@ Used by the <code>read</code> method to decide when to read one record vs. many 
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
+              <p>Attribute names that match this pattern are time attributes.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  TIME_ATTRIBUTE_PATTERN: <span class="hljs-regexp">///
+    ^
+    [a-z_]+_at
+    $
+  ///</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
               <p>Set time attributes with a value of <code>&quot;now&quot;</code> to the current time. Called by the<code>create</code> 
 and <code>update</code> methods to populate <code>&quot;created_at&quot;</code> and <code>&quot;updated_at&quot;</code> attributes.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  setTime: (attributes) -&gt;
-    pattern = <span class="property">@TIME_ATTRIBUTE_PATTERN</span>
-    timestamp = (<span class="keyword">new</span> Date).toJSON()
-    <span class="keyword">for</span> name, value <span class="keyword">of</span> attributes <span class="keyword">when</span> name.match(pattern) <span class="keyword">and</span> value <span class="keyword">is</span> <span class="string">"now"</span>
+            <div class="content"><div class='highlight'><pre>  setTime: <span class="hljs-function"><span class="hljs-params">(attributes)</span> -&gt;</span>
+    pattern = @TIME_ATTRIBUTE_PATTERN
+    timestamp = (<span class="hljs-keyword">new</span> Date).toJSON()
+    <span class="hljs-keyword">for</span> name, value <span class="hljs-keyword">of</span> attributes <span class="hljs-keyword">when</span> name.match(pattern) <span class="hljs-keyword">and</span> value <span class="hljs-keyword">is</span> <span class="hljs-string">"now"</span>
       attributes[name] = timestamp</pre></div></div>
             
         </li>
