@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Minimalist elasticsearch library.",
   "author": "Craig Davey",
-  "licenses": [{ 
+  "licenses": [{
     "type": "MIT",
     "url": "https://github.com/craigdavey/elastic_storage/raw/master/License.txt"
   }],
@@ -19,10 +19,7 @@
   },
   "devDependencies": {
     "backbone": ">=0.9.10",
-    "coffee-script": ">=1.6.1",
-    "nodeunit": ">=0.7"
-  },
-  "engines": {
-    "node": ">=0.8"
+    "coffee-script": "*",
+    "nodeunit": "*"
   }
 }

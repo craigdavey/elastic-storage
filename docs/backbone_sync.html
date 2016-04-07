@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>backbone_sync.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="aliases.html">
+                aliases.coffee
+              </a>
+            
+              
+              <a class="source" href="backbone_sync.html">
+                backbone_sync.coffee
+              </a>
+            
+              
+              <a class="source" href="core.html">
+                core.coffee
+              </a>
+            
+              
+              <a class="source" href="crud.html">
+                crud.coffee
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.coffee
+              </a>
+            
+              
+              <a class="source" href="indices.html">
+                indices.coffee
+              </a>
+            
+              
+              <a class="source" href="scan.html">
+                scan.coffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>backbone_sync.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Generates a <code>Backbone.sync</code> method bound to a instance of [ElasticStorage].
+Accepts the same <code>options</code> as <code>ElasticStorage</code>:</p>
+<pre><code>Backbone.sync = ElasticStorage.setupBackboneSync
+  host: &quot;storage.example.com&quot;
+  port: 9200</code></pre>
+<p>If your model (or collection) defines a <code>storageAddress</code> it will be used
+as the <code>address</code> argument for storage methods. If there is no <code>storageAddress</code>
+the object’s <code>url</code> will be used instead. You should probably define both
+methods if your models are used in multiple environments. Use <code>model.url()</code>
+on the client side and <code>model.storageAddress()</code> on the server:</p>
+<pre><code>class Memo extends Backbone.Model
+  storageAddress: -&gt;
+    &quot;app/#{@url()}&quot;
+
+  url: -&gt;
+    if @isNew()
+      &quot;memos&quot;
+    else
+      &quot;memos/#{@id}&quot;</code></pre>
+<p>Define <code>criteria</code> on any collections that should be reduced or sorted. 
+Specify your <code>criteria</code> with the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/">query DSL</a>.</p>
+<pre><code>class ArchivedMemos extends Backbone.Collection
+  storageAddress: -&gt;
+    &quot;app/memos&quot;
+
+  criteria: -&gt;
+    filter: {exists: {field: &quot;archived_at&quot;}}
+    sort: {&quot;updated_at&quot;: {order:&quot;desc&quot;}}
+    size: 100</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>module.exports.<span class="function"><span class="title">setupBackboneSync</span></span> = (options={}) -&gt;
+  <span class="keyword">if</span> options <span class="keyword">instanceof</span> <span class="keyword">this</span>
+    storage = options
+  <span class="keyword">else</span>
+    storage = <span class="keyword">new</span> <span class="keyword">this</span> options
+  
+  <span class="keyword">return</span> (method, object, options={}) -&gt;
+    address = getValue(object, <span class="string">"storageAddress"</span>) <span class="keyword">or</span> getValue(object, <span class="string">"url"</span>)
+    
+    input = <span class="keyword">switch</span> method
+      <span class="keyword">when</span> <span class="string">"read"</span>
+        getValue(object, <span class="string">"criteria"</span>)
+      <span class="keyword">when</span> <span class="string">"create"</span>, <span class="string">"update"</span>
+        object.toJSON()
+    
+    storage[method] address, input, (error, output, response, request) -&gt;
+      <span class="keyword">if</span> error <span class="keyword">is</span> <span class="literal">undefined</span>
+        <span class="keyword">if</span> options.success <span class="keyword">then</span> options.success(object, output, options)
+        object.trigger(<span class="string">"sync"</span>, object, output, options)
+      <span class="keyword">else</span>
+        <span class="keyword">if</span> options.error <span class="keyword">then</span> options.error(object, request, options)
+        object.trigger(<span class="string">"error"</span>, object, request, options)
+
+
+<span class="function"><span class="title">getValue</span></span> = (object, member) -&gt;
+  <span class="keyword">if</span> object[member]?.call <span class="keyword">then</span> object[member]() <span class="keyword">else</span> object[member]</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

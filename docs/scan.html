@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>scan.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="aliases.html">
+                aliases.coffee
+              </a>
+            
+              
+              <a class="source" href="backbone_sync.html">
+                backbone_sync.coffee
+              </a>
+            
+              
+              <a class="source" href="core.html">
+                core.coffee
+              </a>
+            
+              
+              <a class="source" href="crud.html">
+                crud.coffee
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.coffee
+              </a>
+            
+              
+              <a class="source" href="indices.html">
+                indices.coffee
+              </a>
+            
+              
+              <a class="source" href="scan.html">
+                scan.coffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>scan.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Exports the <code>scan</code> method. Used to read through all the records in one or many collections.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>{extend} = require <span class="string">"underscore"</span>
+{waterfall} = require <span class="string">"async"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h1>Scan all records in the collection(s) at <code>address</code></h1>
+<p><code>address</code> specificies the collection(s) that should be scanned.</p>
+<p><code>options</code> defines two functions:</p>
+<ul>
+<li><p><code>forEach</code> is an iterator that accepts a <code>record</code> argument.</p>
+</li>
+<li><p><code>done</code> is called when the scan is complete.</p>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.<span class="function"><span class="title">scan</span></span> = (address, options={}) -&gt;
+  <span class="keyword">new</span> Scan <span class="keyword">this</span>, address, options
+        
+<span class="class"><span class="keyword">class</span> <span class="title">Scan</span></span>
+  size: <span class="number">10</span>
+  total: <span class="number">0</span>
+  
+  constructor: (<span class="property">@storage</span>, <span class="property">@path</span>, options={}) -&gt;
+    extend <span class="keyword">this</span>, options
+    waterfall [
+      (ƒ) =&gt; <span class="property">@getFirstScrollId</span> ƒ
+      (scrollId, ƒ) =&gt; <span class="property">@processDocs</span> scrollId, ƒ
+    ], <span class="property">@done</span>
+  
+  forEach: (doc) -&gt; 
+    console.log <span class="string">"<span class="subst">#{doc["_type"]}</span>/<span class="subst">#{doc["_id"]}</span>"</span>
+
+  done: (error, total) =&gt; 
+    console.error error <span class="keyword">if</span> error?
+    console.log <span class="string">"Finished scan of <span class="subst">#{total}</span> docs."</span>
+
+  getFirstScrollId: (callback) -&gt;
+    <span class="property">@storage</span>.request
+      method: <span class="string">"POST"</span>
+      path: <span class="string">"<span class="subst">#{@path}</span>/_search?search_type=scan&amp;scroll=10m&amp;size=<span class="subst">#{@size}</span>"</span>
+      done: (error, response) -&gt; callback(error, response[<span class="string">"_scroll_id"</span>])
+
+  processDocs: (scrollId, callback) -&gt;
+    <span class="property">@storage</span>.request
+      method: <span class="string">"POST"</span>
+      path: <span class="string">"/_search/scroll?scroll=10m"</span>
+      body: scrollId
+      done: (error, response) =&gt;
+        hits = response?[<span class="string">"hits"</span>][<span class="string">"hits"</span>]
+        scrollId = response?[<span class="string">"_scroll_id"</span>]
+
+        <span class="keyword">if</span> hits.length &gt; <span class="number">0</span>
+          <span class="property">@total</span> = <span class="property">@total</span> + hits.length
+          <span class="property">@forEach</span> doc <span class="keyword">for</span> doc <span class="keyword">in</span> hits
+        
+        <span class="keyword">if</span> scrollId? <span class="keyword">and</span> hits.length <span class="keyword">isnt</span> <span class="number">0</span>
+          <span class="property">@processDocs</span> scrollId, callback
+        <span class="keyword">else</span>
+          callback(error, <span class="property">@total</span>)</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
