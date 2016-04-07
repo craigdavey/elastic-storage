@@ -1,12 +1,12 @@
 # Exports `index` and `search` – all you need to dethrone Google.
 {extend} = require "underscore"
 
-module.exports = 
+module.exports =
   # # Index a record at this `address` with these `attributes`
   #
   # `address` should be a string in the form `"index/collection/id"`.
   #
-  # Dispatches a [document indexing request](http://www.elasticsearch.org/guide/reference/api/index_.html) 
+  # Dispatches a [document indexing request](http://www.elasticsearch.org/guide/reference/api/index_.html)
   # that `PUT`s `attributes` in the location defined by `address`.
   # If a record already exists at the `address` it will be replaced.
   #
@@ -17,15 +17,15 @@ module.exports =
     @request "PUT",
       path: address
       body: attributes
-      done: (error, output, response, request) -> 
+      done: (error, output, response, request) ->
         callback error, undefined, response, request
 
   # # Search `address` for records that match `criteria`
   #
   # `address` specifies the collections that should be searched.
   # For example: an `address` of `"business/memos"` searches records in the `"memos"` collection of the `"business"` index.
-  # Addresses that expand to multiple indices and/or collections are acceptable too. 
-  # Review [elasticsearch’s multi-index syntax](http://www.elasticsearch.org/guide/reference/api/multi-index.html) for details.
+  # Addresses that expand to multiple indices and/or collections are acceptable too.
+  # Review [Elasticsearch’s multi-index syntax](http://www.elasticsearch.org/guide/reference/api/multi-index.html) for details.
   #
   # Define your `criteria` with the [query DSL](http://www.elasticsearch.org/guide/reference/query-dsl/).
   # Common `criteria` include `query`, `highlights`, `filter`, `size`, `from` and `sort`.
@@ -33,7 +33,7 @@ module.exports =
   #
   # Dispatches a [document search request](http://www.elasticsearch.org/guide/reference/api/search/).
   #
-  # Expect `callback(error, hits, ...)` when the request is done. 
+  # Expect `callback(error, hits, ...)` when the request is done.
   # `hits` is a list that’s been augmented with the `total` number of hits and the `highScore`.
   # Each hit in the list contains `score`, `collection`, `record` and `highlights`.
 

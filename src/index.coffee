@@ -1,4 +1,4 @@
-# `ElasticStorage` instances provide methods to communicate with an [elasticsearch](http://www.elasticsearch.org)
+# `ElasticStorage` instances provide methods to communicate with an [Elasticsearch](http://www.elasticsearch.org)
 # cluster from a [Node](http://nodejs.org/) programming environment. Require the
 # constructor in your program and then construct a new `storage` instance to work
 # with, like this:
@@ -6,7 +6,7 @@
 #     ElasticStorage = require "elastic-storage"
 #     storage = new ElasticStorage
 #
-# Instances are configured to use an elasticsearch cluster at `http://localhost:9200/`
+# Instances are configured to use an Elasticsearch cluster at `http://localhost:9200/`
 # by default. You can configure a different network address with the `host` and
 # `port` options when you construct a new instance:
 #

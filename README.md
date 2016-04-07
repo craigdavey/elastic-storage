@@ -1,7 +1,7 @@
 # Elastic Storage
 
-Elastic Storage is a miniature [elasticsearch](http://elasticsearch.org) library for [Node](http://nodejs.org).
-It gives you a simplified elasticsearch API and an easy synchronization layer for [Backbone](http://backbonejs.org) models.
+Elastic Storage is a miniature [Elasticsearch](http://elasticsearch.org) library for [Node](http://nodejs.org).
+It gives you a simplified Elasticsearch API and an easy synchronization layer for [Backbone](http://backbonejs.org) models.
 
 The [source code](https://github.com/craigdavey/elastic-storage) and examples are written in [CoffeeScript](http://coffeescript.org), however,
 you don’t need to install CoffeeScript to use Elastic Storage.
@@ -21,11 +21,11 @@ Now you can construct an `ElasticStorage` instance to work with:
       host: "localhost"
       port: 9200
 
-Your `storage` instance provides `index`, `search`, `create`, `read`, `update`, `delete`, `init`, `drop` and `refresh` methods. All of these methods accept an `address` argument that refers to an elasticsearch URL. And they all accept a Node style `callback` function. [Review the annotated source code for details](https://craigdavey.github.io/elastic-storage/docs/index.html).
+Your `storage` instance provides `index`, `search`, `create`, `read`, `update`, `delete`, `init`, `drop` and `refresh` methods. All of these methods accept an `address` argument that refers to an Elasticsearch URL. And they all accept a Node style `callback` function. [Review the annotated source code for details](https://craigdavey.github.io/elastic-storage/docs/index.html).
 
 ### Synchronize with Backbone
 
-If you want to store your Backbone models in elasticsearch use `ElasticStorage.setupBackboneSync()` to replace `Backbone.sync`. The setup method accepts the same `options` as the `ElasticStorage` constructor:
+If you want to store your Backbone models in Elasticsearch use `ElasticStorage.setupBackboneSync()` to replace `Backbone.sync`. The setup method accepts the same `options` as the `ElasticStorage` constructor:
 
     Backbone.sync = ElasticStorage.setupBackboneSync
       host: "storage.example.com"
@@ -60,7 +60,7 @@ Specify your `criteria` with the [query DSL](http://www.elasticsearch.org/guide/
         size: 100
 
 
-### Adding records to elasticsearch
+### Adding records to Elasticsearch
 
 Add a memo to the `"business"` index:
 
