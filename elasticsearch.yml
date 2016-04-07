@@ -1,4 +1,4 @@
-cluster.name: "elastic_storage_test"
-node.name: "elastic_storage_test"
+cluster.name: "elastic-storage-test"
+node.name: "elastic-storage-test"
 network.host: "localhost"
 http.port: 9201

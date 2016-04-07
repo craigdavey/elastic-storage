@@ -3,7 +3,7 @@
 Elastic Storage is a miniature [elasticsearch](http://elasticsearch.org) library for [Node](http://nodejs.org).
 It gives you a simplified elasticsearch API and an easy synchronization layer for [Backbone](http://backbonejs.org) models.
 
-The [source code](https://github.com/craigdavey/elastic_storage) and examples are written in [CoffeeScript](http://backbonejs.org), however,
+The [source code](https://github.com/craigdavey/elastic-storage) and examples are written in [CoffeeScript](http://coffeescript.org), however,
 you don’t need to install CoffeeScript to use Elastic Storage.
 This module provides Javascript code that will work in any modern Node program.
 
@@ -11,9 +11,9 @@ Elastic Storage has two external dependencies: [Async](https://github.com/caolan
 
 ### Get Started
 
-Run `npm install elastic_storage` to get the module and then require the constructor in your program:
+Run `npm install craigdavey/elastic-storage` to get the module and then require the constructor in your program:
 
-    ElasticStorage = require "elastic_storage"
+    ElasticStorage = require "elastic-storage"
 
 Now you can construct an `ElasticStorage` instance to work with:
 
@@ -21,7 +21,7 @@ Now you can construct an `ElasticStorage` instance to work with:
       host: "localhost"
       port: 9200
 
-Your `storage` instance provides `index`, `search`, `create`, `read`, `update`, `delete`, `init`, `drop` and `refresh` methods. All of these methods accept an `address` argument that refers to an elasticsearch URL. And they all accept a Node style `callback` function. [Review the annotated source code for details](http://craig.memos.dev:3000/docs/node_modules/elastic_storage/src/index.coffee).
+Your `storage` instance provides `index`, `search`, `create`, `read`, `update`, `delete`, `init`, `drop` and `refresh` methods. All of these methods accept an `address` argument that refers to an elasticsearch URL. And they all accept a Node style `callback` function. [Review the annotated source code for details](https://craigdavey.github.io/elastic-storage/docs/index.html).
 
 ### Synchronize with Backbone
 
@@ -47,7 +47,7 @@ on the client side and `model.storageAddress()` on the server:
         else
           "memos/#{@id}"
 
-Define `criteria` on any collections that should be reduced or sorted. 
+Define `criteria` on any collections that should be reduced or sorted.
 Specify your `criteria` with the [query DSL](http://www.elasticsearch.org/guide/reference/query-dsl/).
 
     class ArchivedMemos extends Backbone.Collection

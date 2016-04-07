@@ -3,7 +3,7 @@
 # constructor in your program and then construct a new `storage` instance to work
 # with, like this:
 #
-#     ElasticStorage = require "elastic_storage"
+#     ElasticStorage = require "elastic-storage"
 #     storage = new ElasticStorage
 #
 # Instances are configured to use an elasticsearch cluster at `http://localhost:9200/`

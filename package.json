@@ -1,5 +1,5 @@
 {
-  "name": "elastic_storage",
+  "name": "elastic-storage",
   "version": "0.0.1",
   "description": "Minimalist elasticsearch library.",
   "licenses": "Unlicense",
